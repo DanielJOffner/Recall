@@ -1,0 +1,43 @@
+Id,CommandText,Description,Tags,Collection
+1,uname -a,Show system and kernel,bash,linux
+2,head -n1 /etc/issue,Show distri­bution,bash,linux
+3,mount,Show mounted filesy­stems,bash,linux
+4,date,Show system date,bash,linux
+5,uptime,Show uptime,bash,linux
+6,whoami,Show your username,bash,linux
+7,man command,Show manual for command,bash,linux
+8,CTRL-c,Stop current command,bash,linux
+9,CTRL-z,Sleep program,bash,linux
+10,CTRL-a,Go to start of line,bash,linux
+11,CTRL-e,Go to end of line,bash,linux
+12,CTRL-u,Cut from start of line,bash,linux
+13,CTRL-k,Cut to end of line,bash,linux
+14,CTRL-r,Search history,bash,linux
+15,!!,Repeat last command,bash,linux
+16,!abc,Run last command starting with abc,bash,linux
+17,!abc:p,Print last command starting with abc,bash,linux
+18,!$,Last argument of previous command,bash,linux
+19,ALT-.,Last argument of previous command,bash,linux
+20,!*,All arguments of previous command,bash,linux
+21,^abc^123,"Run previous command, replacing abc with 123",bash,linux
+22,env,Show enviro­nment variables,bash,linux
+23,echo $NAME,Output value of $NAME environment variable,bash,linux
+24,export NAME=value,Set $NAME variable to value,bash,linux
+25,$PATH,Executable search path,bash,linux
+26,$HOME,Home directory,bash,linux
+27,$SHELL,Current shell,bash,linux
+28,cmd < file,Input of cmd from file,io,linux
+29,cmd1 <(cmd2),Output of cmd2 as file input to cmd1,io,linux
+30,cmd > file,Standard output (stdout) of cmd to file,io,linux
+31,cmd > /dev/null,Discard stdout of cmd,io,linux
+32,cmd >> file,Append stdout to file,io,linux
+33,cmd 2> file,Error output (stderr) of cmd to file,io,linux
+34,cmd 1>&2,stdout to same place as stderr,io,linux
+35,cmd 2>&1,stderr to same place as stdout,io,linux
+36,cmd &> file,Every output of cmd to file,io,linux
+37,cmd1 | cmd2,stdout of cmd1 to cmd2,pipes,linux
+38,cmd1 |& cmd2,stderr of cmd1 to cmd2,pipes,linux
+39,cmd1 ; cmd2,Run cmd1 then cmd2,command,linux
+40,cmd1 && cmd2,Run cmd2 if cmd1 is successful,command,linux
+41,cmd1 || cmd2,Run cmd2 if cmd1 is not successful,command,linux
+42,cmd &,Run cmd in a subshell,command,linux
