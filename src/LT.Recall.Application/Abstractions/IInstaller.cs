@@ -2,6 +2,8 @@
 {
     public interface IInstaller
     {
+        string Name { get; }
+
         /// <summary>
         /// 
         /// </summary>

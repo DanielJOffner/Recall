@@ -8,6 +8,8 @@ namespace LT.Recall.Infrastructure.Installers.Github
 {
     public class GitHubInstaller : IInstaller
     {
+        public string Name => "Github";
+
         private readonly GitHubClient _gitHubClient;
         private readonly IImportFileReaderFactory _importFileReaderFactory;
         private readonly ICommandRepository _commandRepository;
