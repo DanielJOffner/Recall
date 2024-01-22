@@ -38,7 +38,7 @@ namespace LT.Recall.Application.Features
                 {
                     response.Installers.Add(new Response.Installer
                     {
-                        Name = installer.GetType().Name,
+                        Name = installer.Name,
                         Collections = await installer.ListCollections()
                     });
                 }

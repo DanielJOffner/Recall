@@ -48,16 +48,14 @@ namespace LT.Recall.Infrastructure.Installers.Github
 
         public async Task<List<string>> ListCollections()
         {
-            var url = GetUrl("");
+            var url = GetIndexFileUrl();
             var response = await _httpClient.GetAsync(url);
             var content = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new InfrastructureError(string.Format(Resources.UnknownError, content), InfraErrorCode.UnknownError);
 
-            var collections = content.Split("\r\n").ToList();
-
-            return new List<string>() { };
+            return content.Split("\n").ToList();
         }
 
 
@@ -66,7 +64,7 @@ namespace LT.Recall.Infrastructure.Installers.Github
             return $"{BasePath}{collectionOrLocation}{FileExtension}";
         }
 
-        private string GetIndexUrl()
+        private string GetIndexFileUrl()
         {
             return $"{BasePath}{IndexFile}";
         }

@@ -23,13 +23,13 @@ namespace LT.Recall.Cli.Verbs
 
             if (o.ListAll)
             {
-                await HandleListInstallers();
+                return await HandleListInstallers();
             }
 
             return await HandleInstall(args);
         }
 
-        private async Task HandleListInstallers()
+        private async Task<CliResult> HandleListInstallers()
         {
             var sb = new StringBuilder();
             var result = await Mediator.Send(new Application.Features.ListInstallers.Request());
@@ -41,6 +41,7 @@ namespace LT.Recall.Cli.Verbs
                     sb.AppendLine($"  {collection}");
                 }
             }
+            return new CliResult(sb.ToString(), ResultType.Message, result);
         }
 
         private async Task<CliResult> HandleInstall(List<string> args)

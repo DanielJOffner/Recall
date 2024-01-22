@@ -1,2 +1,1 @@
 linux - common linux commands
-test - new entry
