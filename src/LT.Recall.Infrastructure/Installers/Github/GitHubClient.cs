@@ -11,6 +11,7 @@ namespace LT.Recall.Infrastructure.Installers.Github
 
         private const string BasePath = "https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/";
         private const string FileExtension = ".csv";
+        private const string IndexFile = "index.txt";
 
         public GitHubClient(HttpClient httpClient)
         {
@@ -51,6 +52,11 @@ namespace LT.Recall.Infrastructure.Installers.Github
             var response = await _httpClient.GetAsync(url);
             var content = await response.Content.ReadAsStringAsync();
 
+            if (response.StatusCode != HttpStatusCode.OK)
+                throw new InfrastructureError(string.Format(Resources.UnknownError, content), InfraErrorCode.UnknownError);
+
+            var collections = content.Split(Environment.NewLine).ToList();
+
             return new List<string>() { };
         }
 
@@ -58,6 +64,11 @@ namespace LT.Recall.Infrastructure.Installers.Github
         private string GetUrl(string collectionOrLocation)
         {
             return $"{BasePath}{collectionOrLocation}{FileExtension}";
+        }
+
+        private string GetIndexUrl()
+        {
+            return $"{BasePath}{IndexFile}";
         }
     }
 }
