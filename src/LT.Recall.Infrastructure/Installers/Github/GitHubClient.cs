@@ -55,7 +55,7 @@ namespace LT.Recall.Infrastructure.Installers.Github
             if (response.StatusCode != HttpStatusCode.OK)
                 throw new InfrastructureError(string.Format(Resources.UnknownError, content), InfraErrorCode.UnknownError);
 
-            var collections = content.Split(Environment.NewLine).ToList();
+            var collections = content.Split("\r\n").ToList();
 
             return new List<string>() { };
         }
