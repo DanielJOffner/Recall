@@ -33,6 +33,7 @@ namespace LT.Recall.Cli.Verbs
         {
             var sb = new StringBuilder();
             var result = await Mediator.Send(new Application.Features.ListInstallers.Request());
+            sb.AppendLine();
             foreach (var installer in result.Installers)
             {
                 sb.AppendLine($"{installer.Name}");

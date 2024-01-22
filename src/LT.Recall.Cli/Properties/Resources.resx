@@ -218,8 +218,9 @@
   <data name="InstallVerbExampleText" xml:space="preserve">
     <value>usage:
     install linux
+    install https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/linux.csv
 
-To see all available collections, please visit https://github.com/DanielJOffner/Recall/. </value>
+For more information, please visit https://github.com/DanielJOffner/Recall/. </value>
   </data>
   <data name="InstallVerbHelpText" xml:space="preserve">
     <value>Install collections.</value>

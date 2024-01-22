@@ -210,8 +210,9 @@ namespace LT.Recall.Cli.Properties {
         /// <summary>
         ///   Looks up a localized string similar to usage:
         ///    install linux
+        ///    install https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/linux.csv
         ///
-        ///To see all available collections, please visit https://github.com/DanielJOffner/Recall/. .
+        ///For more information, please visit https://github.com/DanielJOffner/Recall/. .
         /// </summary>
         public static string InstallVerbExampleText {
             get {

@@ -2,6 +2,7 @@
 {
     public interface IInstaller
     {
+        string Description { get; }
         string Name { get; }
 
         /// <summary>

@@ -4,6 +4,7 @@ using LT.Recall.Infrastructure.Export;
 using LT.Recall.Infrastructure.Import;
 using LT.Recall.Infrastructure.Installers;
 using LT.Recall.Infrastructure.Installers.Github;
+using LT.Recall.Infrastructure.Installers.Uri;
 using LT.Recall.Infrastructure.Logging;
 using LT.Recall.Infrastructure.Persistence.FileSystem;
 using LT.Recall.Infrastructure.Serialization;
@@ -65,6 +66,8 @@ namespace LT.Recall.Cli.DI
             services.AddScoped<HttpClient>();
             services.AddScoped<GitHubClient>();
             services.AddScoped<GitHubInstaller>();
+            services.AddScoped<UriInstaller>();
+            services.AddScoped<TempFileInstaller>();
 
             return services;
         }

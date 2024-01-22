@@ -61,6 +61,15 @@ namespace LT.Recall.Infrastructure.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HTTP GET {0} returned {1}. {2}.
+        /// </summary>
+        internal static string BadInstallUriError {
+            get {
+                return ResourceManager.GetString("BadInstallUriError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command with id {0} appears twice in the collection..
         /// </summary>
         internal static string DuplicateCommandError {

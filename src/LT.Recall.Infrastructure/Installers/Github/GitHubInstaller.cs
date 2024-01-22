@@ -8,17 +8,18 @@ namespace LT.Recall.Infrastructure.Installers.Github
 {
     public class GitHubInstaller : IInstaller
     {
+        public string Description => "Install collections from the Recall Github repo";
         public string Name => "Github";
 
         private readonly GitHubClient _gitHubClient;
-        private readonly IImportFileReaderFactory _importFileReaderFactory;
-        private readonly ICommandRepository _commandRepository;
-        public GitHubInstaller(GitHubClient gitHubClient, IImportFileReaderFactory importFileReaderFactory, ICommandRepository commandRepository)
+        private readonly TempFileInstaller _tempFileInstaller;
+
+        public GitHubInstaller(GitHubClient gitHubClient, TempFileInstaller tempFileInstaller)
         {
             _gitHubClient = gitHubClient;
-            _importFileReaderFactory = importFileReaderFactory;
-            _commandRepository = commandRepository;
+            _tempFileInstaller = tempFileInstaller;
         }
+
 
         public async Task<(int inserted, int updated)> Install(string collectionOrLocation)
         {
@@ -28,11 +29,8 @@ namespace LT.Recall.Infrastructure.Installers.Github
             using var writer = new TempFileWriter();
             var contents = await _gitHubClient.GetContents(collectionOrLocation);
             var tempFile = writer.Write(contents.contents, contents.extension);
-            var importFileReader = _importFileReaderFactory.GetReader(tempFile);
-            var commands = importFileReader.Read(tempFile);
-            var result = await _commandRepository.BulkUpsert(commands);
 
-            return (result.inserted, result.updated);
+            return await _tempFileInstaller.Install(tempFile);
         }
 
         public Task<List<string>> ListCollections()
