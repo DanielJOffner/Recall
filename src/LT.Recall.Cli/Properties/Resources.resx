@@ -215,4 +215,16 @@
   <data name="ExportVerbHelpText" xml:space="preserve">
     <value>Export commands.</value>
   </data>
+  <data name="InstallVerbExampleText" xml:space="preserve">
+    <value>usage:
+    install linux
+
+To see all available collections, please visit https://github.com/DanielJOffner/Recall/. </value>
+  </data>
+  <data name="InstallVerbHelpText" xml:space="preserve">
+    <value>Install collections.</value>
+  </data>
+  <data name="ListAllOptionHelpText" xml:space="preserve">
+    <value>List installers and collections.</value>
+  </data>
 </root>

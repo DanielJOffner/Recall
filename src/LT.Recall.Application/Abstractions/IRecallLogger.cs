@@ -1,5 +1,4 @@
-﻿using LT.Recall.Application.Errors;
-using LT.Recall.Domain.Errors;
+﻿using LT.Recall.Domain.Errors;
 
 namespace LT.Recall.Application.Abstractions
 {

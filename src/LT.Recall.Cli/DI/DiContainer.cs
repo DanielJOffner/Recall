@@ -2,6 +2,8 @@
 using LT.Recall.Infrastructure;
 using LT.Recall.Infrastructure.Export;
 using LT.Recall.Infrastructure.Import;
+using LT.Recall.Infrastructure.Installers;
+using LT.Recall.Infrastructure.Installers.Github;
 using LT.Recall.Infrastructure.Logging;
 using LT.Recall.Infrastructure.Persistence.FileSystem;
 using LT.Recall.Infrastructure.Serialization;
@@ -13,11 +15,13 @@ namespace LT.Recall.Cli.DI
     internal class DiContainer : IDisposable
     {
         private IServiceScope _scope;
+        
         public DiContainer()
         {
             var services = BuildServiceCollection();
             _scope = services.BuildServiceProvider().CreateScope();
         }
+
         public T Get<T>() where T : notnull
         {
             return _scope.ServiceProvider.GetRequiredService<T>();
@@ -39,6 +43,7 @@ namespace LT.Recall.Cli.DI
             {
                 cfg.RegisterServicesFromAssembly(typeof(Save).Assembly);
             });
+
             services
                 .AddTransient<Verbs.Help>()
                 .AddTransient<Verbs.Save>()
@@ -46,6 +51,7 @@ namespace LT.Recall.Cli.DI
                 .AddTransient<Verbs.Import>()
                 .AddTransient<Verbs.Stats>()
                 .AddTransient<Verbs.Delete>()
+                .AddTransient<Verbs.Install>()
                 .AddTransient<Verbs.Export>();
 
             services.AddSingleton<IRecallLogger>(new RecallLogger(LogLevel.Info));
@@ -55,6 +61,11 @@ namespace LT.Recall.Cli.DI
             services.AddScoped<IJsonSerializer, RecallJsonSerializer>();
             services.AddScoped<IImportFileReaderFactory, ImportFileReaderFactory>();
             services.AddScoped<IExportFileWriterFactory, ExportFileWriterFactory>();
+            services.AddScoped<IInstallerFactory, InstallerFactory>();
+            services.AddScoped<HttpClient>();
+            services.AddScoped<GitHubClient>();
+            services.AddScoped<GitHubInstaller>();
+
             return services;
         }
     }

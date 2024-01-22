@@ -67,7 +67,8 @@ search	Search commands.
 delete	Delete commands.
 import	Import commands.
 export	Export commands.
-stats	Storage statistics."
+stats	Storage statistics.
+install	Install collections."
             },
             new object[]
             {

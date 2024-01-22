@@ -1,4 +1,5 @@
 ﻿using LT.Recall.Application.Abstractions;
+using LT.Recall.Application.Errors;
 using LT.Recall.Domain.Entities;
 using LT.Recall.Domain.ValueObjects;
 using LT.Recall.Infrastructure.Errors;
@@ -27,6 +28,53 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
         {
             _jsonSerializer = jsonSerializer;
             _infrastructureConfiguration = infrastructureConfiguration;
+        }
+
+        public async Task<(int updated, int inserted)> BulkUpsert(List<Command> commands)
+        {
+            int inserted = 0;
+            int updated = 0;
+
+            try
+            {
+                await BeginTransactionAsync();
+
+                foreach (var command in commands)
+                {
+                    ThrowIfDuplicate(commands, command);
+
+                    command.GenerateIdIfEmpty();
+
+                    var exists = await ExistsAsync(command.Id ?? string.Empty);
+                    if (exists)
+                    {
+                        await UpdateAsync(command);
+                        updated++;
+                    }
+                    else
+                    {
+                        await SaveAsync(command);
+                        inserted++;
+                    }
+                }
+
+                await CommitTransactionAsync();
+            }
+            catch
+            {
+                await RollbackTransactionAsync();
+                throw;
+            }
+
+            return (updated, inserted);
+        }
+
+        private static void ThrowIfDuplicate(List<Command> commands, Command command)
+        {
+            if (commands.Count(x => x.CommandId == command.CommandId && string.Equals(x.Collection, command.Collection, StringComparison.InvariantCultureIgnoreCase)) > 1)
+            {
+                throw new ValidationError(string.Format(Resources.DuplicateCommandError, command.CommandId));
+            }
         }
 
         public Task BeginTransactionAsync()

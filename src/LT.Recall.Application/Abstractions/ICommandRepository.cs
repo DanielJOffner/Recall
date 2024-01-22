@@ -24,5 +24,7 @@ namespace LT.Recall.Application.Abstractions
         Task<List<Command>> FetchByCollectionAsync(string collection);
 
         Task<bool> ExistsAsync(string id);
+
+        Task<(int updated, int inserted)> BulkUpsert(List<Command> commands);
     }
 }

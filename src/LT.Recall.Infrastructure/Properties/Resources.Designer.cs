@@ -61,11 +61,20 @@ namespace LT.Recall.Infrastructure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Command with id {0} already exists in the state file..
+        ///   Looks up a localized string similar to Command with id {0} appears twice in the collection..
         /// </summary>
         internal static string DuplicateCommandError {
             get {
                 return ResourceManager.GetString("DuplicateCommandError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GitHub installer could not locate the collection {0}..
+        /// </summary>
+        internal static string GitHubCollectionNotFoundError {
+            get {
+                return ResourceManager.GetString("GitHubCollectionNotFoundError", resourceCulture);
             }
         }
         
@@ -93,6 +102,15 @@ namespace LT.Recall.Infrastructure.Properties {
         internal static string StateFileNotFoundError {
             get {
                 return ResourceManager.GetString("StateFileNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown error occurred: {0}..
+        /// </summary>
+        internal static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
             }
         }
         

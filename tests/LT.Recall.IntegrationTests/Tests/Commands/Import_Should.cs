@@ -85,7 +85,7 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
 
             // act
             var response = ExecuteCommand<Import.Response>($"import -p {filePath}");
-
+            
             // assert 
             response.ResultType.Should().Be(ResultType.Warning);
             response.Message.Should().Contain("Invalid request: Unsupported file type");
@@ -102,7 +102,7 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
 
             // assert 
             response.ResultType.Should().Be(ResultType.Warning);
-            response.Message.Should().Contain("A command with the same command text already exists within the collection.");
+            response.Message.Should().Contain("Invalid request: Command with id 2 appears twice in the collection.");
         }
 
         [TestCase]

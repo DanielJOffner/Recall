@@ -208,11 +208,41 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to usage:
+        ///    install linux
+        ///
+        ///To see all available collections, please visit https://github.com/DanielJOffner/Recall/. .
+        /// </summary>
+        public static string InstallVerbExampleText {
+            get {
+                return ResourceManager.GetString("InstallVerbExampleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install collections..
+        /// </summary>
+        public static string InstallVerbHelpText {
+            get {
+                return ResourceManager.GetString("InstallVerbHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid arguments. Use &apos;{0} --help&apos; for details..
         /// </summary>
         public static string InvalidArgumentsError {
             get {
                 return ResourceManager.GetString("InvalidArgumentsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List installers and collections..
+        /// </summary>
+        public static string ListAllOptionHelpText {
+            get {
+                return ResourceManager.GetString("ListAllOptionHelpText", resourceCulture);
             }
         }
         

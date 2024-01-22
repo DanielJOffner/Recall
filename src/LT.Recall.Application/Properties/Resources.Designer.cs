@@ -142,6 +142,15 @@ namespace LT.Recall.Application.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installation completed successfully. Updated {0}. Imported {1}..
+        /// </summary>
+        internal static string InstallSuccessMessage {
+            get {
+                return ResourceManager.GetString("InstallSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Collection or tags is required..
         /// </summary>
         internal static string MissingDeleteParametersError {

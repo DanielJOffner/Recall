@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DuplicateCommandError" xml:space="preserve">
-    <value>Command with id {0} already exists in the state file.</value>
+    <value>Command with id {0} appears twice in the collection.</value>
+  </data>
+  <data name="GitHubCollectionNotFoundError" xml:space="preserve">
+    <value>GitHub installer could not locate the collection {0}.</value>
   </data>
   <data name="InvalidCsvFormatError" xml:space="preserve">
     <value>Csv file at {0} is not a valid format.</value>
@@ -128,6 +131,9 @@
   </data>
   <data name="StateFileNotFoundError" xml:space="preserve">
     <value>Sate file could not be found at {0}</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>An unknown error occurred: {0}.</value>
   </data>
   <data name="UnsupportedFileTypeError" xml:space="preserve">
     <value>{0} is not a supported file type.</value>

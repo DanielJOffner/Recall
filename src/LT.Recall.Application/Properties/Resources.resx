@@ -153,4 +153,7 @@
   <data name="ExportedMessage" xml:space="preserve">
     <value>Exported {0}.</value>
   </data>
+  <data name="InstallSuccessMessage" xml:space="preserve">
+    <value>Installation completed successfully. Updated {0}. Imported {1}.</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@
 {
     public enum InfraErrorCode
     {
+        UnknownError = 0,
         NotFound = 1,
         StateFileNotFound = 2,
         InvalidFileFormat = 3,
@@ -9,5 +10,6 @@
         NoTransactionInProgress = 5,
         UniqueConstraintViolation = 6,
         UnknownExportFailure = 7,
+        GitHubCollectionNotFound = 8,
     }
 }
