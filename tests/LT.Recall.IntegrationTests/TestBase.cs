@@ -32,6 +32,12 @@ namespace LT.Recall.IntegrationTests
             await PersistenceFixture.Repository.SaveAsync(command);
         }
 
+        protected async Task<Command?> FetchCommand(int commandId)
+        {
+            var allCommands = await PersistenceFixture.Repository.FetchAllAsync(page: 1, pageSize: 100);
+            return allCommands.commands?.FirstOrDefault(x => x.CommandId == commandId) ?? null;
+        }
+
         protected async Task<(List<Command>? commands, int totalResults)> FetchAllCommands()
         {
             return await PersistenceFixture.Repository.FetchAllAsync(page:1, pageSize: 100);

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BadInstallUriError" xml:space="preserve">
+  <data name="BadInstallUrlError" xml:space="preserve">
     <value>HTTP GET {0} returned {1}. {2}</value>
   </data>
   <data name="DuplicateCommandError" xml:space="preserve">

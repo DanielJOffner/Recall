@@ -1,9 +1,7 @@
-﻿using System.Security.Cryptography;
-using FluentAssertions;
+﻿using FluentAssertions;
 using LT.Recall.Application.Features;
 using LT.Recall.Cli.Output;
 using LT.Recall.Domain.Entities;
-using LT.Recall.IntegrationTests.TestFiles;
 
 namespace LT.Recall.IntegrationTests.Tests.Commands
 {

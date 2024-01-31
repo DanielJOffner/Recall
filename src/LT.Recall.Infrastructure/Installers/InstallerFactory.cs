@@ -1,31 +1,31 @@
 ﻿using LT.Recall.Application.Abstractions;
 using LT.Recall.Infrastructure.Installers.Github;
-using LT.Recall.Infrastructure.Installers.Uri;
+using LT.Recall.Infrastructure.Installers.Url;
 
 namespace LT.Recall.Infrastructure.Installers
 {
     public class InstallerFactory : IInstallerFactory
     {
         private readonly GitHubInstaller _gitHubInstaller;
-        private readonly UriInstaller _uriInstaller;
+        private readonly UrlInstaller _urlInstaller;
 
-        public InstallerFactory(GitHubInstaller gitHubInstaller, UriInstaller uriInstaller)
+        public InstallerFactory(GitHubInstaller gitHubInstaller, UrlInstaller urlInstaller)
         {
             _gitHubInstaller = gitHubInstaller;
-            _uriInstaller = uriInstaller;
+            _urlInstaller = urlInstaller;
         }
 
         public IInstaller GetInstaller(string collectionOrLocation)
         {
-            if (IsUri(collectionOrLocation))
+            if (IsUrl(collectionOrLocation))
             {
-                return _uriInstaller;
+                return _urlInstaller;
             }
 
             return _gitHubInstaller;
         }
 
-        private bool IsUri(string collectionOrLocation)
+        private bool IsUrl(string collectionOrLocation)
         {
             return collectionOrLocation.StartsWith("http", StringComparison.InvariantCultureIgnoreCase);
         }

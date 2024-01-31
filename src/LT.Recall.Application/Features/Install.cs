@@ -18,6 +18,7 @@ namespace LT.Recall.Application.Features
             public int Updated { get; init; }
             public int Imported { get; init; }
             public string UserFriendlyMessage { get; init; } = string.Empty;
+            public string Installer { get; init; } = string.Empty;
         }
 
         private class Validator : AbstractValidator<Request>
@@ -47,7 +48,8 @@ namespace LT.Recall.Application.Features
                 {
                     Updated = result.updated,
                     Imported = result.inserted,
-                    UserFriendlyMessage = string.Format(Resources.InstallSuccessMessage, result.updated, result.inserted)
+                    UserFriendlyMessage = string.Format(Resources.InstallSuccessMessage, result.updated, result.inserted),
+                    Installer = installer.Name
                 };
             }
         }

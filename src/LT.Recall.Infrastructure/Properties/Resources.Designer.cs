@@ -63,9 +63,9 @@ namespace LT.Recall.Infrastructure.Properties {
         /// <summary>
         ///   Looks up a localized string similar to HTTP GET {0} returned {1}. {2}.
         /// </summary>
-        internal static string BadInstallUriError {
+        internal static string BadInstallUrlError {
             get {
-                return ResourceManager.GetString("BadInstallUriError", resourceCulture);
+                return ResourceManager.GetString("BadInstallUrlError", resourceCulture);
             }
         }
         

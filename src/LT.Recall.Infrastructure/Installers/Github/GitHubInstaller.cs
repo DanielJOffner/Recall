@@ -9,7 +9,7 @@ namespace LT.Recall.Infrastructure.Installers.Github
     public class GitHubInstaller : IInstaller
     {
         public string Description => "Install collections from the Recall Github repo";
-        public string Name => "Github";
+        public string Name => "Github Installer";
 
         private readonly GitHubClient _gitHubClient;
         private readonly TempFileInstaller _tempFileInstaller;

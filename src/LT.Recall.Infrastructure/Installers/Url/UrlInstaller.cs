@@ -5,17 +5,17 @@ using LT.Recall.Infrastructure.Errors.Codes;
 using LT.Recall.Infrastructure.IO;
 using LT.Recall.Infrastructure.Properties;
 
-namespace LT.Recall.Infrastructure.Installers.Uri
+namespace LT.Recall.Infrastructure.Installers.Url
 {
-    public class UriInstaller :  IInstaller
+    public class UrlInstaller :  IInstaller
     {
-        public string Description => "Install collections from anywhere on the web";
-        public string Name => "Uri Installer";
+        public string Description => "Install collections from web resources";
+        public string Name => "Url Installer";
 
         private readonly HttpClient _httpClient;
         private readonly TempFileInstaller _tempFileInstaller;
 
-        public UriInstaller(HttpClient httpClient, TempFileInstaller tempFileInstaller)
+        public UrlInstaller(HttpClient httpClient, TempFileInstaller tempFileInstaller)
         {
             _httpClient = httpClient;
             _tempFileInstaller = tempFileInstaller;
@@ -37,7 +37,7 @@ namespace LT.Recall.Infrastructure.Installers.Uri
             var content = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new InfrastructureError(string.Format(Resources.BadInstallUriError, collectionOrLocation, response.StatusCode, content), InfraErrorCode.UnknownError);
+                throw new InfrastructureError(string.Format(Resources.BadInstallUrlError, collectionOrLocation, response.StatusCode, content), InfraErrorCode.UnknownError);
 
             return content;
         }
