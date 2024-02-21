@@ -57,7 +57,7 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
         public async Task Import_Collection_Using_Url_Installer()
         {
             // arrange
-            var collectionOrLocation = "https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/linux.csv";
+            var collectionOrLocation = "https://raw.githubusercontent.com/DanielJOffner/Recall/main/collections/linux.csv";
 
             // act
             var response = ExecuteCommand<Install.Response>($"install {collectionOrLocation}");

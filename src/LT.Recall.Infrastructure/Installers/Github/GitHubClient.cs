@@ -9,7 +9,7 @@ namespace LT.Recall.Infrastructure.Installers.Github
     {
         private readonly HttpClient _httpClient;
 
-        private const string BasePath = "https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/";
+        private const string BasePath = "https://raw.githubusercontent.com/DanielJOffner/Recall/main/collections/";
         private const string FileExtension = ".csv";
         private const string IndexFile = "index.txt";
 
