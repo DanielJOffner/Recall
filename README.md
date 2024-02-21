@@ -3,7 +3,7 @@ Use cheat sheets at the command line.
 ![gif](https://github.com/DanielJOffner/Recall/blob/main/assets/preview.gif)
 
 ## Downloads
-Downloads are available from the [releases](https://link-url-here.org) page
+Downloads are available from the [releases](https://github.com/DanielJOffner/Recall/releases) page
 ## Help
 
 `recall help`
