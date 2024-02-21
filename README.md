@@ -29,6 +29,8 @@ Recall will execute `search` if there are no arguments.
 
 Example [collections](https://github.com/DanielJOffner/Recall/tree/main/collections)
 
+Install the example with `recall install linux`
+
 ## Backup/Restore
 
 All collections are stored in `recall-state.json` at the bin path location.
