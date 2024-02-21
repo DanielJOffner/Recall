@@ -1,0 +1,46 @@
+name: 'CI'
+
+on: [pull_request, push]
+
+jobs:
+  ci:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '8.0.x' ]
+    permissions: write-all
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          # Look to see if there is a cache hit for the corresponding requirements file
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Run Tests
+        run: dotnet test --no-restore --logger trx --results-directory "${{ github.workspace }}/TestResults"
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: "${{ github.workspace }}/TestResults"
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: Test Report            # Name of the check run which will be created
+          path: "${{ github.workspace }}/TestResults/*.trx"    # Path to test results
+          reporter: dotnet-trx        # Format of test results

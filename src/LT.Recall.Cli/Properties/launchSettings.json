@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "LT.Recall.Cli": {
+      "commandName": "Project"
+    }
+  }
+}
