@@ -29,7 +29,9 @@ namespace LT.Recall.Cli.Verbs
         {
             var sb = new StringBuilder();
             FormatTotals(response, sb);
+            sb.AppendLine();
             FormatCollections(response, sb);
+            sb.AppendLine();
             FormatTags(response, sb);
             return sb.ToString();
         }
@@ -38,7 +40,11 @@ namespace LT.Recall.Cli.Verbs
         {
             if (response.Collections.Any())
             {
-                // sb.AppendLine(Formatter.Format(response.Collections));
+                sb.AppendLine("Collections:");
+                foreach (var collection in response.Collections)
+                {
+                    sb.AppendLine($"{collection.Collection}|{collection.Count}|{collection.Size}");
+                }
             }
         }
 
@@ -46,17 +52,19 @@ namespace LT.Recall.Cli.Verbs
         {
             if (response.Tags.Any())
             {
-               // sb.AppendLine(Formatter.Format(response.Tags));
+                sb.AppendLine("Tags:");
+                foreach (var tag in response.Tags)
+                {
+                    sb.AppendLine($"{tag.Tag}|{tag.Count}|{tag.Size}");
+                }
             }
 
         }
 
         private void FormatTotals(Application.Features.Stats.Response response, StringBuilder sb)
         {
-            // sb.AppendLine(Formatter.Format(new List<TotalsResponse>
-            // {
-            //     response.Totals
-            // }));
+            sb.AppendLine($"Total Commands: {response.Totals.TotalCommands}");
+            sb.AppendLine($"Total Size: {response.Totals.TotalSize}");
         }
     }
 }
