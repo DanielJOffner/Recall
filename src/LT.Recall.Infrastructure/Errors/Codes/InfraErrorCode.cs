@@ -11,5 +11,6 @@
         UniqueConstraintViolation = 6,
         UnknownExportFailure = 7,
         GitHubCollectionNotFound = 8,
+        SerializationError = 9,
     }
 }

@@ -1,14 +1,13 @@
 ﻿using LT.Recall.Application.Abstractions;
 using LT.Recall.Application.Properties;
 using LT.Recall.Domain.Entities;
-using MediatR;
 using static LT.Recall.Application.Features.Search.Response;
 
 namespace LT.Recall.Application.Features
 {
     public class Search
     {
-        public class Request : IRequest<Response>
+        public class Request 
         {
             public string SearchString { get; init; } = string.Empty;
             public int PageSize { get; init; } = 20;
@@ -35,7 +34,7 @@ namespace LT.Recall.Application.Features
 
             public string UserFriendlyMessage { get; init; } = string.Empty;
         }
-        internal class Handler : IRequestHandler<Request, Response>
+        public class Handler 
         {
             private readonly ICommandRepository _commandRepository;
             public Handler(ICommandRepository commandRepository)

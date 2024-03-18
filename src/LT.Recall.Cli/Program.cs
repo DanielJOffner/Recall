@@ -3,6 +3,7 @@ using LT.Recall.Cli.Output;
 using LT.Recall.Cli.Properties;
 using LT.Recall.Cli.Verbs;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using LT.Recall.Application.Abstractions;
 using LT.Recall.Cli.DI;
 using LT.Recall.Cli.Themes;
@@ -29,6 +30,12 @@ namespace LT.Recall.Cli
 
         public class Options : IOptions
         {
+            [method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(Options))]
+            public Options()
+            {
+                
+            }
+
             public bool XTest { get; set; }
             public bool Verbose { get; set; }
             public bool Help { get; set; }
@@ -46,12 +53,28 @@ namespace LT.Recall.Cli
             }
 
             var diContainer = new DiContainer();
+
+            SetLogLevel(diContainer, options);
             var theme = ThemeStore.GetTheme();
             var verb = VerbParser.GetVerb(args, diContainer);
             var result = await verb.ExecuteAsync(theme, args, options);
             var serializer = diContainer.Get<IJsonSerializer>();
 
             OutputFormatter.Write(theme, result, options.XTest, serializer);
+        }
+
+        private static void SetLogLevel(DiContainer diContainer, Options options)
+        {
+            var logger = diContainer.Get<IRecallLogger>();
+
+            if (options.Verbose)
+            {
+                logger.SetLogLevel(LogLevel.Debug);
+            }
+            else
+            {
+                logger.SetLogLevel(LogLevel.Info);
+            }
         }
 
         /// <summary>

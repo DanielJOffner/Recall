@@ -8,18 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LT.Recall.Application\LT.Recall.Application.csproj" />
+    <ProjectReference Include="..\LT.Recall.Domain\LT.Recall.Domain.csproj" />
   </ItemGroup>
-
-	<ItemGroup>
-		<InternalsVisibleTo Include="LT.Recall.UnitTests" />
-		<InternalsVisibleTo Include="LT.Recall.IntegrationTests" />
-	</ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -34,6 +29,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Install\" />
   </ItemGroup>
 
 </Project>

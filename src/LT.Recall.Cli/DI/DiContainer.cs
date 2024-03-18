@@ -1,4 +1,5 @@
 ﻿using LT.Recall.Application.Abstractions;
+using LT.Recall.Cli.Serialization;
 using LT.Recall.Infrastructure;
 using LT.Recall.Infrastructure.Export;
 using LT.Recall.Infrastructure.Import;
@@ -7,9 +8,7 @@ using LT.Recall.Infrastructure.Installers.Github;
 using LT.Recall.Infrastructure.Installers.Url;
 using LT.Recall.Infrastructure.Logging;
 using LT.Recall.Infrastructure.Persistence.FileSystem;
-using LT.Recall.Infrastructure.Serialization;
 using Microsoft.Extensions.DependencyInjection;
-using Save = LT.Recall.Application.Features.Save;
 
 namespace LT.Recall.Cli.DI
 {
@@ -20,7 +19,9 @@ namespace LT.Recall.Cli.DI
         public DiContainer()
         {
             var services = BuildServiceCollection();
+#pragma warning disable IL3050
             _scope = services.BuildServiceProvider().CreateScope();
+#pragma warning restore IL3050
         }
 
         public T Get<T>() where T : notnull
@@ -40,10 +41,6 @@ namespace LT.Recall.Cli.DI
         private IServiceCollection BuildServiceCollection()
         {
             var services = new ServiceCollection();
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(typeof(Save).Assembly);
-            });
 
             services
                 .AddTransient<Verbs.Help>()
@@ -54,6 +51,16 @@ namespace LT.Recall.Cli.DI
                 .AddTransient<Verbs.Delete>()
                 .AddTransient<Verbs.Install>()
                 .AddTransient<Verbs.Export>();
+
+            services
+                .AddTransient<Application.Features.Save.Handler>()
+                .AddTransient<Application.Features.Search.Handler>()
+                .AddTransient<Application.Features.Import.Handler>()
+                .AddTransient<Application.Features.Stats.Handler>()
+                .AddTransient<Application.Features.Delete.Handler>()
+                .AddTransient<Application.Features.Install.Handler>()
+                .AddTransient<Application.Features.ListInstallers.Handler>()
+                .AddTransient<Application.Features.Export.Handler>();
 
             services.AddSingleton<IRecallLogger>(new RecallLogger(LogLevel.Info));
             services.AddSingleton<InfrastructureConfiguration>();

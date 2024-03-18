@@ -61,15 +61,6 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Storage collection..
-        /// </summary>
-        public static string CollectionOptionHelpText {
-            get {
-                return ResourceManager.GetString("CollectionOptionHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Deleted {0}..
         /// </summary>
         public static string CommandsDeletedMessage {
@@ -97,30 +88,24 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -c, --collection    	storage collection.
+        ///-t, --tags 		tags (command separated).
+        ///
+        ///usage:
+        ///	delete -c &quot;Linux&quot; -t &quot;Linux,IO&quot;.
+        /// </summary>
+        public static string DeleteHelpText {
+            get {
+                return ResourceManager.GetString("DeleteHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No commands found..
         /// </summary>
         public static string DeleteNoCommandsFoundMessage {
             get {
                 return ResourceManager.GetString("DeleteNoCommandsFoundMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to usage:
-        ///    delete -c &quot;infrastructure&quot; -t &quot;kubernetes,aws&quot;.
-        /// </summary>
-        public static string DeleteVerbExampleText {
-            get {
-                return ResourceManager.GetString("DeleteVerbExampleText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete commands..
-        /// </summary>
-        public static string DeleteVerbHelpText {
-            get {
-                return ResourceManager.GetString("DeleteVerbHelpText", resourceCulture);
             }
         }
         
@@ -152,12 +137,14 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to usage: 
-        ///    export -p C:\Files\Export\commands.csv.
+        ///   Looks up a localized string similar to -p, --path	absolute path.
+        ///
+        ///usage:
+        ///	export -p &quot;C:\bin\export.csv&quot;.
         /// </summary>
-        public static string ExportVerbExampleText {
+        public static string ExportHelpText {
             get {
-                return ResourceManager.GetString("ExportVerbExampleText", resourceCulture);
+                return ResourceManager.GetString("ExportHelpText", resourceCulture);
             }
         }
         
@@ -171,61 +158,45 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show help..
-        /// </summary>
-        public static string HelpOptionHelpText {
-            get {
-                return ResourceManager.GetString("HelpOptionHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Help text not configured..
-        /// </summary>
-        public static string HelpTextNotFoundError {
-            get {
-                return ResourceManager.GetString("HelpTextNotFoundError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to usage:
-        ///    import -p C:\Files\Import\commands.csv.
-        /// </summary>
-        public static string ImportVerbExampleText {
-            get {
-                return ResourceManager.GetString("ImportVerbExampleText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Import commands..
-        /// </summary>
-        public static string ImportVerbHelpText {
-            get {
-                return ResourceManager.GetString("ImportVerbHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to usage:
-        ///    install linux
-        ///    install https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/linux.csv
+        ///   Looks up a localized string similar to -v, --verbose	enable verbose output.
+        ///-h, --help	show help.
         ///
-        ///For more information, please visit https://github.com/DanielJOffner/Recall/. .
+        ///save	Save a new command.
+        ///search	Search commands.
+        ///delete	Delete commands.
+        ///import	Import commands.
+        ///export	Export commands.
+        ///stats	Storage statistics.
+        ///install	Install collections..
         /// </summary>
-        public static string InstallVerbExampleText {
+        public static string HelpText {
             get {
-                return ResourceManager.GetString("InstallVerbExampleText", resourceCulture);
+                return ResourceManager.GetString("HelpText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Install collections..
+        ///   Looks up a localized string similar to -p, --path	absolute path.
+        ///
+        ///usage:
+        ///	import -p &quot;C:\bin\import.csv&quot;.
         /// </summary>
-        public static string InstallVerbHelpText {
+        public static string ImportHelpText {
             get {
-                return ResourceManager.GetString("InstallVerbHelpText", resourceCulture);
+                return ResourceManager.GetString("ImportHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -l, --listAll	list installers.
+        ///
+        ///usage:
+        ///	install linux // install the test collection
+        ///	install -l // list available installers.
+        /// </summary>
+        public static string InstallHelpText {
+            get {
+                return ResourceManager.GetString("InstallHelpText", resourceCulture);
             }
         }
         
@@ -257,15 +228,6 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Absolute path..
-        /// </summary>
-        public static string PathOptionHelpText {
-            get {
-                return ResourceManager.GetString("PathOptionHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete {0} command(s)? [Y/N]:.
         /// </summary>
         public static string PreviewDeleteMessage {
@@ -275,11 +237,14 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save a new command..
+        ///   Looks up a localized string similar to -c, --collection    storage collection.
+        ///
+        ///usage: 
+        ///    save -c &quot;infrastructure&quot;.
         /// </summary>
-        public static string SaveCommandHelpText {
+        public static string SaveHelpText {
             get {
-                return ResourceManager.GetString("SaveCommandHelpText", resourceCulture);
+                return ResourceManager.GetString("SaveHelpText", resourceCulture);
             }
         }
         
@@ -293,58 +258,20 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to usage: 
-        ///    save -c &quot;infrastructure&quot;.
+        ///   Looks up a localized string similar to use the arrow keys then press ENTER to copy to the clipboard..
         /// </summary>
-        public static string SaveVerbExampleText {
+        public static string SearchHelpText {
             get {
-                return ResourceManager.GetString("SaveVerbExampleText", resourceCulture);
+                return ResourceManager.GetString("SearchHelpText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save a new command..
+        ///   Looks up a localized string similar to show storage statistics..
         /// </summary>
-        public static string SaveVerbHelpText {
+        public static string StatsHelpText {
             get {
-                return ResourceManager.GetString("SaveVerbHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to usage:
-        ///    search linux chmod.
-        /// </summary>
-        public static string SearchVerbExampleText {
-            get {
-                return ResourceManager.GetString("SearchVerbExampleText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Search commands..
-        /// </summary>
-        public static string SearchVerbHelpText {
-            get {
-                return ResourceManager.GetString("SearchVerbHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage statistics..
-        /// </summary>
-        public static string StatsVerbHelpText {
-            get {
-                return ResourceManager.GetString("StatsVerbHelpText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comma separated list of tags..
-        /// </summary>
-        public static string TagsOptionHelpText {
-            get {
-                return ResourceManager.GetString("TagsOptionHelpText", resourceCulture);
+                return ResourceManager.GetString("StatsHelpText", resourceCulture);
             }
         }
         

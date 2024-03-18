@@ -6,13 +6,12 @@ using LT.Recall.Application.Extensions;
 using LT.Recall.Application.Properties;
 using LT.Recall.Domain.Entities;
 using LT.Recall.Domain.ValueObjects;
-using MediatR;
 
 namespace LT.Recall.Application.Features
 {
     public class Save
     {
-        public class Request : IRequest<Response>
+        public class Request
         {
             public string CommandText { get; init; } = string.Empty;
             public string Description { get; init; } = string.Empty;
@@ -37,7 +36,7 @@ namespace LT.Recall.Application.Features
             }
         }
 
-        public class Handler : IRequestHandler<Request, Response>
+        public class Handler
         {
             private readonly Validator _validator;
             private readonly ICommandRepository _commandRepository;

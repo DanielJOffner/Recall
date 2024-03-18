@@ -138,53 +138,11 @@
   <data name="InvalidArgumentsError" xml:space="preserve">
     <value>Invalid arguments. Use '{0} --help' for details.</value>
   </data>
-  <data name="SaveCommandHelpText" xml:space="preserve">
-    <value>Save a new command.</value>
-  </data>
   <data name="SaveSuccessMessage" xml:space="preserve">
     <value>Saved command: {0}</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
     <value>An unknown error occurred.</value>
-  </data>
-  <data name="HelpTextNotFoundError" xml:space="preserve">
-    <value>Help text not configured.</value>
-  </data>
-  <data name="HelpOptionHelpText" xml:space="preserve">
-    <value>Show help.</value>
-  </data>
-  <data name="SaveVerbHelpText" xml:space="preserve">
-    <value>Save a new command.</value>
-  </data>
-  <data name="SearchVerbHelpText" xml:space="preserve">
-    <value>Search commands.</value>
-  </data>
-  <data name="SaveVerbExampleText" xml:space="preserve">
-    <value>usage: 
-    save -c "infrastructure"</value>
-  </data>
-  <data name="SearchVerbExampleText" xml:space="preserve">
-    <value>usage:
-    search linux chmod</value>
-  </data>
-  <data name="TagsOptionHelpText" xml:space="preserve">
-    <value>Comma separated list of tags.</value>
-  </data>
-  <data name="ImportVerbExampleText" xml:space="preserve">
-    <value>usage:
-    import -p C:\Files\Import\commands.csv</value>
-  </data>
-  <data name="ImportVerbHelpText" xml:space="preserve">
-    <value>Import commands.</value>
-  </data>
-  <data name="PathOptionHelpText" xml:space="preserve">
-    <value>Absolute path.</value>
-  </data>
-  <data name="StatsVerbHelpText" xml:space="preserve">
-    <value>Storage statistics.</value>
-  </data>
-  <data name="CollectionOptionHelpText" xml:space="preserve">
-    <value>Storage collection.</value>
   </data>
   <data name="CommandsDeletedMessage" xml:space="preserve">
     <value>Deleted {0}.</value>
@@ -195,37 +153,66 @@
   <data name="DeleteAbortedMessage" xml:space="preserve">
     <value>Cancelled.</value>
   </data>
-  <data name="DeleteVerbExampleText" xml:space="preserve">
-    <value>usage:
-    delete -c "infrastructure" -t "kubernetes,aws"</value>
-  </data>
-  <data name="DeleteVerbHelpText" xml:space="preserve">
-    <value>Delete commands.</value>
-  </data>
   <data name="DeleteNoCommandsFoundMessage" xml:space="preserve">
     <value>No commands found.</value>
   </data>
   <data name="MakeSelectionMessage" xml:space="preserve">
     <value>Make selection and press ENTER or CTRL+C to exit.</value>
   </data>
-  <data name="ExportVerbExampleText" xml:space="preserve">
-    <value>usage: 
-    export -p C:\Files\Export\commands.csv</value>
-  </data>
   <data name="ExportVerbHelpText" xml:space="preserve">
     <value>Export commands.</value>
   </data>
-  <data name="InstallVerbExampleText" xml:space="preserve">
-    <value>usage:
-    install linux
-    install https://raw.githubusercontent.com/DanielJOffner/Recall/installers/collections/linux.csv
-
-For more information, please visit https://github.com/DanielJOffner/Recall/. </value>
-  </data>
-  <data name="InstallVerbHelpText" xml:space="preserve">
-    <value>Install collections.</value>
-  </data>
   <data name="ListAllOptionHelpText" xml:space="preserve">
     <value>List installers and collections.</value>
+  </data>
+  <data name="HelpText" xml:space="preserve">
+    <value>-v, --verbose	enable verbose output.
+-h, --help	show help.
+
+save	Save a new command.
+search	Search commands.
+delete	Delete commands.
+import	Import commands.
+export	Export commands.
+stats	Storage statistics.
+install	Install collections.</value>
+  </data>
+  <data name="DeleteHelpText" xml:space="preserve">
+    <value>-c, --collection    	storage collection.
+-t, --tags 		tags (command separated).
+
+usage:
+	delete -c "Linux" -t "Linux,IO"</value>
+  </data>
+  <data name="SaveHelpText" xml:space="preserve">
+    <value>-c, --collection    storage collection.
+
+usage: 
+    save -c "infrastructure"</value>
+  </data>
+  <data name="ExportHelpText" xml:space="preserve">
+    <value>-p, --path	absolute path.
+
+usage:
+	export -p "C:\bin\export.csv"</value>
+  </data>
+  <data name="ImportHelpText" xml:space="preserve">
+    <value>-p, --path	absolute path.
+
+usage:
+	import -p "C:\bin\import.csv"</value>
+  </data>
+  <data name="InstallHelpText" xml:space="preserve">
+    <value>-l, --listAll	list installers.
+
+usage:
+	install linux // install the test collection
+	install -l // list available installers</value>
+  </data>
+  <data name="SearchHelpText" xml:space="preserve">
+    <value>use the arrow keys then press ENTER to copy to the clipboard.</value>
+  </data>
+  <data name="StatsHelpText" xml:space="preserve">
+    <value>show storage statistics.</value>
   </data>
 </root>

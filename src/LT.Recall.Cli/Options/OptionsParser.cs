@@ -7,11 +7,10 @@ namespace LT.Recall.Cli.Options
         /// <summary>
         /// Remove any options arguments from the args array
         /// </summary>
-        public static string[] RemoveOptions(string[] args, Type verb)
+        public static string[] RemoveOptions<TOptions>(string[] args, TOptions options) where TOptions : IOptions
         {
             List<string> filteredArgs = args.ToList();
-            var instance = GetInstanceFromVerbType(verb);
-            foreach (var property in instance!.GetType().GetProperties())
+            foreach (var property in options.GetType().GetProperties())
             {
                 if (IsOption(filteredArgs.ToArray(), property.Name, out int index))
                 {
@@ -26,25 +25,12 @@ namespace LT.Recall.Cli.Options
         /// </summary>
         public static TOptions Parse<TOptions>(string[] args) where TOptions : IOptions, new()
         {
-            var instance = Activator.CreateInstance(typeof(TOptions));
-            foreach (var property in instance!.GetType().GetProperties())
+            var options = new TOptions();
+            foreach (var property in options.GetType().GetProperties())
             {
-                SetPropertyValue(property, instance, args);
+                SetPropertyValue(property, options, args);
             }
-            return (TOptions)instance;
-        }
-
-        /// <summary>
-        /// Parse args to IOptions instance
-        /// </summary>
-        public static IOptions Parse(string[] args, Type verb)
-        {
-            var instance = GetInstanceFromVerbType(verb);
-            foreach (var property in instance!.GetType().GetProperties())
-            {
-                SetPropertyValue(property, instance, args);
-            }
-            return (instance as IOptions)!;
+            return options;
         }
 
         /// <summary>
@@ -76,15 +62,6 @@ namespace LT.Recall.Cli.Options
         }
 
         /// <summary>
-        /// Get the options type for the verb
-        /// eg. Search -> SearchOptions
-        /// </summary>
-        private static Type GetOptionsType(Type verbType)
-        {
-            return verbType.GetNestedType($"{verbType.Name}Options") ?? throw new Exception("Options type not found");
-        }
-
-        /// <summary>
         /// Return true if the option is present in the args
         /// eg. --verbose or -v
         /// </summary>
@@ -99,13 +76,6 @@ namespace LT.Recall.Cli.Options
             if (index != -1) return true;
 
             return false;
-        }
-
-        private static object? GetInstanceFromVerbType(Type verb)
-        {
-            var optionsType = GetOptionsType(verb);
-            var instance = Activator.CreateInstance(optionsType);
-            return instance;
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using LT.Recall.Application.Abstractions;
-using MediatR;
 
 namespace LT.Recall.Application.Features
 {
     public class ListInstallers
     {
-        public class Request : IRequest<Response>
+        public class Request
         {
         }
 
@@ -22,7 +21,7 @@ namespace LT.Recall.Application.Features
         }
 
 
-        public class Handler : IRequestHandler<Request, Response>
+        public class Handler
         {
             private readonly IInstallerFactory _installerFactory;
             public Handler(IInstallerFactory installerFactory)

@@ -2,13 +2,12 @@
 using LT.Recall.Application.Abstractions;
 using LT.Recall.Application.Extensions;
 using LT.Recall.Application.Properties;
-using MediatR;
 
 namespace LT.Recall.Application.Features
 {
     public class Install
     {
-        public class Request : IRequest<Response>
+        public class Request
         {
             public string CollectionOrLocation { get; set; } = string.Empty;
         }
@@ -29,7 +28,7 @@ namespace LT.Recall.Application.Features
             }
         }
 
-        public class Handler : IRequestHandler<Request, Response>
+        public class Handler
         {
             private readonly IInstallerFactory _installerFactory;
             private readonly Validator _validator = new Validator();

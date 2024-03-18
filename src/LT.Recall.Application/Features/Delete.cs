@@ -3,13 +3,12 @@ using LT.Recall.Application.Abstractions;
 using LT.Recall.Application.Extensions;
 using LT.Recall.Application.Properties;
 using LT.Recall.Domain.ValueObjects;
-using MediatR;
 
 namespace LT.Recall.Application.Features
 {
     public class Delete
     {
-        public class Request : IRequest<Response>
+        public class Request 
         {
             public List<string> Tags { get; init; } = new();
             public string Collection { get; init; } = string.Empty;
@@ -37,7 +36,7 @@ namespace LT.Recall.Application.Features
             }
         }
 
-        public class Handler : IRequestHandler<Request, Response>
+        public class Handler
         {
             private readonly Validator _validator = new();
             private readonly ICommandRepository _commandRepository;
@@ -47,11 +46,11 @@ namespace LT.Recall.Application.Features
                 _commandRepository = commandRepository;
             }
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            public async Task<Delete.Response> Handle(Request request, CancellationToken cancellationToken)
             {
                 await _validator.ValidateOrThrowAsync(request);
 
-                var response = new Response();
+                var response = new Delete.Response();
                 var commands = await _commandRepository.FetchAsync(request.Collection, request.Tags.Select(t => new Tag(t)).ToList());
 
                 if (request.Preview)

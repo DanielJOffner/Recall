@@ -1,15 +1,15 @@
-﻿using FluentValidation;
+﻿using System.ComponentModel;
+using FluentValidation;
 using LT.Recall.Application.Abstractions;
 using LT.Recall.Application.Extensions;
 using LT.Recall.Application.Properties;
 using LT.Recall.Domain.Entities;
-using MediatR;
 
 namespace LT.Recall.Application.Features
 {
     public class Export
     {
-        public class Request : IRequest<Response>
+        public class Request 
         {
             public string FilePath { get; set; } = string.Empty;
         }
@@ -33,7 +33,7 @@ namespace LT.Recall.Application.Features
             }
         }
 
-        public class Handler : IRequestHandler<Request, Response>
+        public class Handler
         {
             private readonly IExportFileWriterFactory _exportFileWriterFactory;
             private readonly ICommandRepository _commandRepository;

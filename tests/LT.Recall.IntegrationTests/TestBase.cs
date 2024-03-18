@@ -1,7 +1,8 @@
 ﻿using LT.Recall.Application.Abstractions;
+using LT.Recall.Cli.Serialization;
 using LT.Recall.Domain.Entities;
-using LT.Recall.Infrastructure.Serialization;
 using LT.Recall.IntegrationTests.Fixtures;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace LT.Recall.IntegrationTests
@@ -87,7 +88,7 @@ namespace LT.Recall.IntegrationTests
             if (!json.Success)
                 throw new Exception($"Failed to parse json from cli output. Output was {cliOutput}");
 
-            return _jsonSerializer.Deserialize<TestModeCliResult<T>>(json.Value);
+            return JsonSerializer.Deserialize<TestModeCliResult<T>>(json.Value)!;
         }
     }
 }

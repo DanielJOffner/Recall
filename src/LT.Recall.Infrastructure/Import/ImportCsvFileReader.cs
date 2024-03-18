@@ -1,43 +1,63 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using LT.Recall.Application.Abstractions;
+﻿using LT.Recall.Application.Abstractions;
 using LT.Recall.Domain.Entities;
 using LT.Recall.Domain.ValueObjects;
-using LT.Recall.Infrastructure.Errors;
-using LT.Recall.Infrastructure.Errors.Codes;
-using LT.Recall.Infrastructure.Formats;
-using LT.Recall.Infrastructure.Properties;
-using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace LT.Recall.Infrastructure.Import
 {
     internal class ImportCsvFileReader : IImportFileReader
     {
-        private IReaderConfiguration configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = true,
-            IgnoreBlankLines = true,
-            TrimOptions = TrimOptions.Trim
-        };
-
         public List<Command> Read(string filePath)
         {
-            if(!File.Exists(filePath))
-                throw new NotFoundError(filePath, typeof(string));
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException($"File not found: {filePath}");
 
             try
             {
-                using (var reader = new StreamReader(filePath))
-                using (var csv = new CsvReader(reader, configuration))
+                var lines = File.ReadAllLines(filePath);
+                var headers = lines[0].Split(','); // Get headers
+
+                var idIndex = Array.IndexOf(headers, nameof(Command.Id));
+                var commandTextIndex = Array.IndexOf(headers, nameof(Command.CommandText));
+                var descriptionIndex = Array.IndexOf(headers, nameof(Command.Description));
+                var tagsIndex = Array.IndexOf(headers, nameof(Command.Tags));
+                var collectionIndex = Array.IndexOf(headers, nameof(Command.Collection));
+
+                var commands = new List<Command>();
+
+                foreach (var line in lines.Skip(1)) // Skip header line
                 {
-                    var records = csv.GetRecords<CsvFileFormat>();
-                    return records.Select(r => new Command(r.CommandText, r.Description, r.Tags.Split(',').Select(x => new Tag(x)).ToList(), commandId: r.Id, collection: r.Collection)).ToList();
+                    var fields = SplitCsvLine(line);
+
+                    var tags = fields[tagsIndex].Split(',').Select(x => new Tag(TrimQuotes(x))).ToList();
+                    var commandText = TrimQuotes(fields[commandTextIndex]);
+                    var description = TrimQuotes(fields[descriptionIndex]);
+                    var commandId = int.Parse(fields[idIndex]);
+                    var collection = TrimQuotes(fields[collectionIndex]);
+
+                    var command = new Command(commandText, description, tags, commandId: commandId, collection: collection);
+                    commands.Add(command);
                 }
+
+                return commands;
             }
             catch (Exception e)
             {
-                throw new InfrastructureError(string.Format(Resources.InvalidCsvFormatError, filePath), InfraErrorCode.InvalidFileFormat, e);
+                throw new Exception($"Invalid CSV format in file: {filePath}", e);
             }
+        }
+
+        private string TrimQuotes(string value)
+        {
+            return value.Trim('"');
+        }
+
+        private static string[] SplitCsvLine(string line)
+        {
+            var pattern = ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))";
+            var regex = new Regex(pattern);
+            return regex.Split(line);
         }
     }
 }

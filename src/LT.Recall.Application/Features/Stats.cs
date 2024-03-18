@@ -1,13 +1,12 @@
 ﻿using LT.Recall.Application.Abstractions;
 using LT.Recall.Application.Extensions;
 using LT.Recall.Domain.Entities;
-using MediatR;
 
 namespace LT.Recall.Application.Features
 {
     public class Stats
     {
-        public class Request : IRequest<Response>
+        public class Request 
         {
 
         }
@@ -39,7 +38,7 @@ namespace LT.Recall.Application.Features
             public List<CollectionResponse> Collections { get; set; } = new();
         }
 
-        public class Handler : IRequestHandler<Request, Response>
+        public class Handler
         {
             private readonly ICommandRepository _commandRepository;
 

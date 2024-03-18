@@ -1,11 +1,8 @@
 ﻿using FluentAssertions;
-using LT.Recall.Application.Errors.Codes;
 using LT.Recall.Application.Features;
 using LT.Recall.Cli.Output;
 using LT.Recall.Domain.Entities;
 using LT.Recall.Domain.ValueObjects;
-using LT.Recall.Infrastructure.Errors.Codes;
-using LT.Recall.IntegrationTests.Extensions;
 using LT.Recall.IntegrationTests.TestFiles;
 
 namespace LT.Recall.IntegrationTests.Tests.Commands
@@ -27,7 +24,7 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
 
             var commands = await FetchAllCommands();
             commands.commands!.Count.Should().Be(3);
-            commands.totalResults!.Should().Be(3);
+            commands.totalResults!.Should().Be(3); 
 
             var command = commands.commands!.First();
             command.CommandId.Should().Be(1);
@@ -123,6 +120,26 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
 
             var commandsAfterImport  = (await FetchAllCommands()).commands;
             commandsBeforeImport.Should().BeEquivalentTo(commandsAfterImport); // state should be rolled back
+        }
+
+        [TestCase]
+        public async Task Handle_Import_Files_With_Commas_In_Command_Text()
+        {
+            // arrange
+            var filePath = TestFileReader.GetFilePath(TestFileType.Import, "003_command_with_commas.csv");
+
+            // act
+            var response = ExecuteCommand<Import.Response>($"import -p {filePath}");
+
+            // assert 
+            response.ResultType.Should().Be(ResultType.Success);
+
+            var commandsAfterImport = (await FetchAllCommands()).commands;
+
+            commandsAfterImport!.Count.Should().Be(1);
+
+            var importedCommand = commandsAfterImport.First();
+            importedCommand.CommandText.Should().Be(@"Command text with literal, commas, in\, contents");
         }
     }
 }

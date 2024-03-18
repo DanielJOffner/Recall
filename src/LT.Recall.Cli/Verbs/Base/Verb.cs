@@ -4,19 +4,23 @@ using LT.Recall.Cli.Output;
 using LT.Recall.Cli.Properties;
 using LT.Recall.Cli.Themes;
 using LT.Recall.Domain.Errors;
-using MediatR;
 
 namespace LT.Recall.Cli.Verbs.Base
 {
-    internal abstract class Verb
+    internal interface IVerb
     {
-        protected readonly IMediator Mediator;
+        Task<CliResult> ExecuteAsync(ITheme theme, string[] args, Program.Options options);
+    }
+
+    internal abstract class Verb<TOptions> : IVerb where TOptions : IOptions, new()
+    {
         protected ITheme Theme;
-        protected Verb(IMediator mediator)
+        protected Verb()
         {
-            Mediator = mediator;
             Theme = new DefaultTheme();
         }
+
+        protected abstract string HelpText { get; }
 
         public async Task<CliResult> ExecuteAsync(ITheme theme, string[] args, Program.Options options)
         {
@@ -24,12 +28,12 @@ namespace LT.Recall.Cli.Verbs.Base
 
             try
             {
-                var verbOptions = OptionsParser.Parse(args, GetType());
+                var verbOptions = OptionsParser.Parse<TOptions>(args);
 
                 if (verbOptions.Help)
-                    return new CliResult(HelpTextGenerator.GenerateHelpText(verbOptions.GetType()));
+                    return new CliResult(HelpText);
 
-                return await ExecuteInner(OptionsParser.RemoveOptions(VerbParser.RemoveVerb(args), GetType()).ToList(), verbOptions);
+                return await ExecuteInner(OptionsParser.RemoveOptions(VerbParser.RemoveVerb(args), verbOptions).ToList(), verbOptions);
             }
             catch (Exception ex)
             {
@@ -73,6 +77,6 @@ namespace LT.Recall.Cli.Verbs.Base
             return new CliResult(message, resultType);
         }
 
-        protected abstract Task<CliResult> ExecuteInner(List<string> args, IOptions options);
+        protected abstract Task<CliResult> ExecuteInner(List<string> args, TOptions options);
     }
 }

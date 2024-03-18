@@ -2,11 +2,20 @@
 using LT.Recall.Domain.Properties;
 using LT.Recall.Domain.ValueObjects;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace LT.Recall.Domain.Entities
 {
     public class Command : Entity
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        [JsonConstructor]
+        public Command(string id) : base(id)
+        {
+
+        }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
         public Command(string commandText, string description, List<Tag>? tags = null, string? id = null, string? collection = null, int? commandId = null) : base(id)
         {
             if (string.IsNullOrWhiteSpace(commandText))
@@ -44,7 +53,7 @@ namespace LT.Recall.Domain.Entities
             }
         }
 
-        public int CommandId { get; private set; }
+        public int CommandId { get; set; }
         public string Collection { get; init; }
         public string Description { get; init; }
 

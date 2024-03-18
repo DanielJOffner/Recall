@@ -2,23 +2,25 @@
 using LT.Recall.Cli.Output;
 using LT.Recall.Cli.Properties;
 using LT.Recall.Cli.Verbs.Base;
-using MediatR;
-using System.ComponentModel;
-using System.Text;
 using TextCopy;
 
 namespace LT.Recall.Cli.Verbs
 {
-    internal class Search : Verb
+    internal class Search : Verb<Search.Options>
     {
-        public class SearchOptions : Program.Options { }
+        private readonly Application.Features.Search.Handler _searchHandler;
 
-        public Search(IMediator mediator) : base(mediator)
+        public Search(Application.Features.Search.Handler searchHandler)
         {
-
+            _searchHandler = searchHandler;
         }
 
-        protected override async Task<CliResult> ExecuteInner(List<string> args, IOptions options)
+        public class Options : Program.Options { }
+
+
+        protected override string HelpText => Resources.SearchHelpText;
+
+        protected override async Task<CliResult> ExecuteInner(List<string> args, Options options)
         {
             int page = 1;
             int pageSize = options.XTest ? 1000 : Console.WindowHeight - 4;
@@ -35,12 +37,12 @@ namespace LT.Recall.Cli.Verbs
         private async Task<CliResult> MakeUserSelection(string searchString, int page, int pageSize, IOptions options)
         {
             int cursor = 0;
-            var response = await Mediator.Send(new Application.Features.Search.Request
+            var response = await _searchHandler.Handle(new Application.Features.Search.Request
             {
                 SearchString = searchString,
                 PageSize = pageSize,
                 Page = page
-            });
+            }, CancellationToken.None);
 
             if (options.XTest)
             {
@@ -76,30 +78,32 @@ namespace LT.Recall.Cli.Verbs
                     Console.ResetColor();
                     if (selected)
                     {
-                        Console.BackgroundColor = Theme.SelectionBackground;
+                        Console.BackgroundColor = Theme.Selection;
+                        Console.Write(" ");
+                        Console.ResetColor();
                     }
 
-                    Console.ForegroundColor = selected ? Theme.SelectionForeground : Theme.CommandText;
+                    Console.ForegroundColor = Theme.CommandText;
                     Console.Write(response.SearchResults[i].CommandText);
-                    Console.ForegroundColor = selected ? ConsoleColor.Gray : ConsoleColor.DarkGray;
+                    Console.ForegroundColor = Theme.Divider;
 
                     Console.Write(" - ");
 
-                    Console.ForegroundColor = selected ?Theme.SelectionForeground : Theme.Description;
+                    Console.ForegroundColor =  Theme.Description;
                     Console.Write(response.SearchResults[i].Description);
-                    Console.ForegroundColor = selected ? ConsoleColor.Gray : ConsoleColor.DarkGray;
+                    Console.ForegroundColor = Theme.Divider;
 
                     Console.Write(" - ");
 
-                    Console.ForegroundColor = selected ?Theme.SelectionForeground : Theme.Collection;
+                    Console.ForegroundColor = Theme.Collection;
                     Console.Write(response.SearchResults[i].Collection);
-                    Console.ForegroundColor = selected ? ConsoleColor.Gray : ConsoleColor.DarkGray;
+                    Console.ForegroundColor = Theme.Divider;
 
                     Console.Write(" - ");
 
-                    Console.ForegroundColor = selected ?Theme.SelectionForeground : Theme.Tags;
+                    Console.ForegroundColor =  Theme.Tags;
                     Console.WriteLine($@"[{string.Join(",", response.SearchResults[i].Tags)}]");
-                    Console.ForegroundColor = selected ? ConsoleColor.Gray : ConsoleColor.DarkGray;
+                    Console.ForegroundColor = Theme.Divider;
 
                     Console.ResetColor();
                 }

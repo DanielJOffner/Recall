@@ -9,8 +9,10 @@
         ConsoleColor SelectionBackground { get; }
         ConsoleColor SelectionForeground { get; }
         ConsoleColor CommandText { get; }
+        ConsoleColor Divider { get; }
         ConsoleColor Description { get; }
         ConsoleColor Collection { get; }
         ConsoleColor Tags { get; }
+        ConsoleColor Selection { get; }
     }
 }

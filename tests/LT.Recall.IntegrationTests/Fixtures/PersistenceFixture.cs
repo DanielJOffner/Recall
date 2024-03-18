@@ -1,7 +1,7 @@
 ﻿using LT.Recall.Application.Abstractions;
+using LT.Recall.Cli.Serialization;
 using LT.Recall.Infrastructure;
 using LT.Recall.Infrastructure.Persistence.FileSystem;
-using LT.Recall.Infrastructure.Serialization;
 
 namespace LT.Recall.IntegrationTests.Fixtures
 {

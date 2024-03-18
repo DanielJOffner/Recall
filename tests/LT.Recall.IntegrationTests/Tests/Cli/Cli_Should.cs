@@ -17,8 +17,8 @@ namespace LT.Recall.IntegrationTests.Tests.Cli
 
             // assert
             lowerCaseOutput.Should().BeEquivalentTo(upperCaseOutput);
-            lowerCaseOutput.Message.Should().Contain("-h, --help\tShow help."); 
-            upperCaseOutput.Message.Should().Contain("-h, --help\tShow help.");
+            lowerCaseOutput.Message.Should().Contain("-h, --help\tshow help."); 
+            upperCaseOutput.Message.Should().Contain("-h, --help\tshow help.");
         }
 
 
@@ -56,11 +56,8 @@ namespace LT.Recall.IntegrationTests.Tests.Cli
             new object[]
             {
                 "help",
-                @"v1.0.0.0
-
--x, --xtest	Start in test mode.
--v, --verbose	Enable verbose output.
--h, --help	Show help.
+                @"-v, --verbose	enable verbose output.
+-h, --help	show help.
 
 save	Save a new command.
 search	Search commands.
@@ -73,7 +70,7 @@ install	Install collections."
             new object[]
             {
                 "save --help",
-                @"-c, --collection	Storage collection.
+                @"-c, --collection    storage collection.
 
 usage: 
     save -c ""infrastructure"""

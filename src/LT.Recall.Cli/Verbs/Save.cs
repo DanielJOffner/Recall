@@ -1,28 +1,33 @@
-﻿using LT.Recall.Cli.Options;
-using LT.Recall.Cli.Output;
+﻿using LT.Recall.Cli.Output;
 using LT.Recall.Cli.Properties;
 using LT.Recall.Cli.Verbs.Base;
-using LT.Recall.Domain.ValueObjects;
-using MediatR;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LT.Recall.Cli.Verbs
 {
-    internal class Save : Verb
+    internal class Save : Verb<Save.Options>
     {
-        public class SaveOptions : Program.Options
+        private readonly Application.Features.Save.Handler _saveHandler;
+
+        public Save(Application.Features.Save.Handler saveHandler)
         {
+            _saveHandler = saveHandler;
+        }
+
+        public class Options : Program.Options
+        {
+            [method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(Options))]
+            public Options()
+            {
+
+            }
             public string Collection { get; set; } = string.Empty;
         }
 
-        public Save(IMediator mediator) : base(mediator)
+        protected override string HelpText => Resources.SaveHelpText;
+
+        protected override async Task<CliResult> ExecuteInner(List<string> args, Options options)
         {
-
-        }
-
-        protected override async Task<CliResult> ExecuteInner(List<string> args, IOptions options)
-        {
-            var saveOptions = (SaveOptions)options;
-
             Console.ForegroundColor = Theme.Message;
             Console.Write(Resources.EnterDescriptionMessage);
             Console.ResetColor();
@@ -38,13 +43,13 @@ namespace LT.Recall.Cli.Verbs
             Console.ResetColor();
             var tags = Console.ReadLine() ?? string.Empty;
 
-            var response = await Mediator.Send(new Application.Features.Save.Request
+            var response = await _saveHandler.Handle(new Application.Features.Save.Request
             {
                 CommandText = commandText,
                 Description = description,
-                Collection = saveOptions.Collection,
+                Collection = options.Collection,
                 Tags = tags.Split(",").Select(tag => tag.Trim()).ToList()
-            });
+            }, CancellationToken.None);
 
             return new CliResult(GetResultMessage(commandText), ResultType.Success, response);
         }

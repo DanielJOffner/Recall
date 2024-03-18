@@ -8,6 +8,21 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
 {
     internal class Delete_Should : TestBase
     {
+        [TestCase]
+        public void Show_Help_Text()
+        {
+            // arrange
+
+            // act
+            var response = ExecuteCommand<Delete.Response>("delete -h");    
+
+            // assert
+            response.Message.Trim().Should().Be(@"-c, --collection    	storage collection.
+-t, --tags 		tags (command separated).
+
+usage:
+	delete -c ""Linux"" -t ""Linux,IO""");
+        }
 
         [TestCase]
         public async Task Treat_Tags_As_Case_Insensitive()

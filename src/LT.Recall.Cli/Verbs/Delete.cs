@@ -1,27 +1,35 @@
-﻿using LT.Recall.Cli.Options;
-using LT.Recall.Cli.Output;
+﻿using LT.Recall.Cli.Output;
 using LT.Recall.Cli.Properties;
 using LT.Recall.Cli.Verbs.Base;
-using MediatR;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LT.Recall.Cli.Verbs
 {
-    internal class Delete : Verb
+    internal class Delete : Verb<Delete.Options>
     {
-        public class DeleteOptions : Program.Options
+        private readonly Application.Features.Delete.Handler _deleteHandler;
+
+        public Delete(Application.Features.Delete.Handler deleteHandler)
         {
+            _deleteHandler = deleteHandler;
+        }
+
+        protected override string HelpText => Resources.DeleteHelpText;
+        public class Options : Program.Options
+        {
+            [method: DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(Options))]
+            public Options()
+            {
+
+            }
             public string Collection { get; init; } = string.Empty;
             public string Tags { get; init; } = string.Empty;
         }
 
-        public Delete(IMediator mediator) : base(mediator)
+        protected override async Task<CliResult> ExecuteInner(List<string> args, Options options)
         {
-        }
-
-        protected override async Task<CliResult> ExecuteInner(List<string> args, IOptions options)
-        {
-            var tags = string.IsNullOrWhiteSpace(((DeleteOptions)options).Tags) ? new List<string>() : ((DeleteOptions)options).Tags.Split(",").ToList();
-            var collection = ((DeleteOptions)options).Collection;
+            var tags = string.IsNullOrWhiteSpace(options.Tags) ? new List<string>() : (options).Tags.Split(",").ToList();
+            var collection = options.Collection;
 
             var request = new LT.Recall.Application.Features.Delete.Request
             {
@@ -30,7 +38,7 @@ namespace LT.Recall.Cli.Verbs
                 Preview = true
             };
 
-            var previewResponse = await Mediator.Send(request);
+            var previewResponse = await _deleteHandler.Handle(request, CancellationToken.None);
 
             if (previewResponse.WillBeDeleted == 0)
             {
@@ -57,7 +65,7 @@ namespace LT.Recall.Cli.Verbs
             }
 
             request.Preview = false;
-            var response = await Mediator.Send(request);
+            var response = await _deleteHandler.Handle(request, CancellationToken.None);
 
             return new CliResult(string.Format(Resources.CommandsDeletedMessage, response.Deleted), ResultType.Success, response);
         }

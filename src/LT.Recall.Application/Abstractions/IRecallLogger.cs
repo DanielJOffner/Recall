@@ -5,6 +5,7 @@ namespace LT.Recall.Application.Abstractions
     public enum LogLevel { Debug = 0, Info = 1, Warn = 2, Error = 3 }
     public interface IRecallLogger
     {
+        public void SetLogLevel(LogLevel logLevel);
         public void Debug(string message, params object[] args);
         public void Info(string message, params object[] args);
         public void Warn(string message, params object[] args);

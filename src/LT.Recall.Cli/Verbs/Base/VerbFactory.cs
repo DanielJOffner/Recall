@@ -10,7 +10,7 @@ namespace LT.Recall.Cli.Verbs.Base
         /// eg. -v -x -h search -> search
         /// eg. search -v -x -h -> search
         /// </summary>
-        internal static Verb GetVerb(string[] args, DiContainer container)
+        internal static IVerb GetVerb(string[] args, DiContainer container)
         {
             var defaultVerb = container.Get<Search>();
 
@@ -22,7 +22,7 @@ namespace LT.Recall.Cli.Verbs.Base
 
                 if (Program.Verbs.TryGetValue(arg, out var verbType))
                 {
-                    var result = container.Get<Verb>(verbType);
+                    var result = container.Get<IVerb>(verbType);
                     return result;
                 }
             }

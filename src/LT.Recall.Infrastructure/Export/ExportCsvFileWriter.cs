@@ -1,10 +1,5 @@
-﻿using CsvHelper;
-using LT.Recall.Application.Abstractions;
+﻿using LT.Recall.Application.Abstractions;
 using LT.Recall.Domain.Entities;
-using LT.Recall.Infrastructure.Errors;
-using LT.Recall.Infrastructure.Errors.Codes;
-using LT.Recall.Infrastructure.Formats;
-using System.Globalization;
 
 namespace LT.Recall.Infrastructure.Export
 {
@@ -15,22 +10,22 @@ namespace LT.Recall.Infrastructure.Export
             try
             {
                 using (var writer = new StreamWriter(filePath))
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
-                    csv.WriteRecords(commands.Select(c => new CsvFileFormat
+                    // Write header
+                    writer.WriteLine("Id,CommandText,Description,Tags,Collection");
+
+                    foreach (var command in commands)
                     {
-                        Id = c.CommandId,
-                        CommandText = c.CommandText,
-                        Description = c.Description,
-                        Tags = string.Join(",", c.Tags.Select(x => x.Name)),
-                        Collection = c.Collection
-                    }));
+                        var line = $"{command.CommandId},{command.CommandText},{command.Description},{string.Join(",", command.Tags.Select(t => t.Name))},{command.Collection}";
+                        writer.WriteLine(line);
+                    }
                 }
+
                 return commands.Count;
             }
             catch (Exception e)
             {
-                throw new InfrastructureError("", InfraErrorCode.UnknownExportFailure, e);
+                throw new Exception("Unknown export failure", e);
             }
         }
     }

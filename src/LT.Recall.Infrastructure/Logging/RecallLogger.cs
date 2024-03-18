@@ -1,16 +1,13 @@
 ﻿using LT.Recall.Application.Abstractions;
-using LT.Recall.Application.Errors;
 using LT.Recall.Domain.Errors;
 using Serilog;
 
 namespace LT.Recall.Infrastructure.Logging
 {
-    // TODO - add some color to the console output
-    // TODO - add configuration key for the log level
     public class RecallLogger : IRecallLogger
     {
         private readonly ILogger _logger;
-        private readonly LogLevel _logLevel;
+        private LogLevel _logLevel;
         public RecallLogger(LogLevel logLevel)
         {
             _logLevel = logLevel;
@@ -19,6 +16,12 @@ namespace LT.Recall.Infrastructure.Logging
                 .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
         }
+
+        public void SetLogLevel(LogLevel logLevel)
+        {
+           _logLevel = logLevel;
+        }
+
         public void Debug(string message, params object[] args)
         {
             if(_logLevel <= LogLevel.Debug)
