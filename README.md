@@ -39,6 +39,5 @@ C:\bin\recall.exe
 C:\bin\recall-state.json
 ``` 
 ## Todo
-- Refactor `OptionsParser` and `DiContainer` to support .NET 8 AOT compilation
 - Add Linux support
 - Add MacOS support
