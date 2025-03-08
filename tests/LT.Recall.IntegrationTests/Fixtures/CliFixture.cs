@@ -7,7 +7,7 @@ namespace LT.Recall.IntegrationTests.Fixtures
     internal class CliFixture
     {
         private readonly int _processTimeout = 2000;
-        private readonly string _fileName = Environment.OSVersion.Platform == PlatformID.Unix ? "LT.Recall.Cli" : "LT.Recall.Cli.exe";
+        private readonly string _fileName = Environment.OSVersion.Platform == PlatformID.Unix ? "recall" : "recall.exe";
         private readonly string _testOption = "--xtest";
         private readonly string _verboseOption = "--verbose";
 

@@ -1,6 +1,4 @@
-﻿using LT.Recall.Application.Abstractions;
-using LT.Recall.Cli.Serialization;
-using LT.Recall.Domain.Entities;
+﻿using LT.Recall.Domain.Entities;
 using LT.Recall.IntegrationTests.Fixtures;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -9,9 +7,8 @@ namespace LT.Recall.IntegrationTests
 {
     internal abstract class TestBase
     {
-        private readonly PersistenceFixture PersistenceFixture = new PersistenceFixture();
-        private readonly CliFixture CliFixture = new CliFixture();
-        private readonly IJsonSerializer _jsonSerializer = new RecallJsonSerializer();
+        private readonly PersistenceFixture PersistenceFixture = new();
+        private readonly CliFixture CliFixture = new();
 
         [SetUp]
         public void Setup()
