@@ -13,6 +13,6 @@
         public ConsoleColor Description { get; } = ConsoleColor.Yellow;
         public ConsoleColor Collection { get; } = ConsoleColor.Cyan;
         public ConsoleColor Tags { get; } = ConsoleColor.Blue;
-        public ConsoleColor Selection { get; } = ConsoleColor.Yellow;
+        public ConsoleColor Selection { get; } = ConsoleColor.DarkYellow;
     }
 }
