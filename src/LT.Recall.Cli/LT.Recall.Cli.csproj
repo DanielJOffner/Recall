@@ -11,8 +11,8 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<AssemblyName>LT.Recall.Cli</AssemblyName>
-		<PackageId>LT.Recall.Cli</PackageId>
+		<AssemblyName>recall</AssemblyName>
+		<PackageId>recall</PackageId>
 		<Title>Recall CLI</Title>
 		<Authors>Daniel Offner</Authors>
 		<Company>Daniel Offner</Company>

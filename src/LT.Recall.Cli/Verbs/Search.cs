@@ -79,18 +79,16 @@ namespace LT.Recall.Cli.Verbs
                     if (selected)
                     {
                         Console.BackgroundColor = Theme.Selection;
-                        Console.Write(" ");
-                        Console.ResetColor();
                     }
 
-                    Console.ForegroundColor = Theme.CommandText;
-                    Console.Write(response.SearchResults[i].CommandText);
+                    Console.ForegroundColor =  Theme.Description;
+                    Console.Write(response.SearchResults[i].Description);
                     Console.ForegroundColor = Theme.Divider;
 
                     Console.Write(" - ");
 
-                    Console.ForegroundColor =  Theme.Description;
-                    Console.Write(response.SearchResults[i].Description);
+                    Console.ForegroundColor = Theme.CommandText;
+                    Console.Write(response.SearchResults[i].CommandText);
                     Console.ForegroundColor = Theme.Divider;
 
                     Console.Write(" - ");
