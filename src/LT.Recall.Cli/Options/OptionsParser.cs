@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace LT.Recall.Cli.Options
 {
@@ -7,10 +8,10 @@ namespace LT.Recall.Cli.Options
         /// <summary>
         /// Remove any options arguments from the args array
         /// </summary>
-        public static string[] RemoveOptions<TOptions>(string[] args, TOptions options) where TOptions : IOptions
+        public static string[] RemoveOptions<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TOptions>(string[] args, TOptions options) where TOptions : IOptions
         {
             List<string> filteredArgs = args.ToList();
-            foreach (var property in options.GetType().GetProperties())
+            foreach (var property in typeof(TOptions).GetProperties())
             {
                 if (IsOption(filteredArgs.ToArray(), property.Name, out int index))
                 {
@@ -23,10 +24,10 @@ namespace LT.Recall.Cli.Options
         /// <summary>
         /// Parse args to IOptions instance
         /// </summary>
-        public static TOptions Parse<TOptions>(string[] args) where TOptions : IOptions, new()
+        public static TOptions Parse<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TOptions>(string[] args) where TOptions : IOptions, new()
         {
             var options = new TOptions();
-            foreach (var property in options.GetType().GetProperties())
+            foreach (var property in typeof(TOptions).GetProperties())
             {
                 SetPropertyValue(property, options, args);
             }

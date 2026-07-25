@@ -8,7 +8,7 @@ namespace LT.Recall.IntegrationTests
     internal abstract class TestBase
     {
         private readonly PersistenceFixture PersistenceFixture = new();
-        private readonly CliFixture CliFixture = new();
+        private readonly Cli CliFixture = new();
 
         [SetUp]
         public void Setup()

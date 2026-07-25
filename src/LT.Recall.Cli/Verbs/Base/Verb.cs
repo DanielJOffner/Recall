@@ -4,6 +4,7 @@ using LT.Recall.Cli.Output;
 using LT.Recall.Cli.Properties;
 using LT.Recall.Cli.Themes;
 using LT.Recall.Domain.Errors;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LT.Recall.Cli.Verbs.Base
 {
@@ -12,7 +13,7 @@ namespace LT.Recall.Cli.Verbs.Base
         Task<CliResult> ExecuteAsync(ITheme theme, string[] args, Program.Options options);
     }
 
-    internal abstract class Verb<TOptions> : IVerb where TOptions : IOptions, new()
+    internal abstract class Verb<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TOptions> : IVerb where TOptions : IOptions, new()
     {
         protected ITheme Theme;
         protected Verb()

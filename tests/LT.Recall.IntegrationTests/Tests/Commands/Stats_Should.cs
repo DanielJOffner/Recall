@@ -39,6 +39,22 @@ namespace LT.Recall.IntegrationTests.Tests.Commands
             response.Data.Totals.TotalSize.Should().Be(totalSize!.Value.ToBytesDisplayValue());
         }
 
+        /// <summary>
+        /// When running in test mode, the state file should be at the bin path directory
+        /// </summary>
+        [TestCase]
+        public async Task Show_State_File_Source()
+        {
+            // arrange
+            var expectedPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recall-state.json");
+
+            // act
+            var response = ExecuteCommand<Stats.Response>("stats");
+
+            // assert
+            response.Data.StateFileSource.Should().Be(expectedPath);
+        }
+
         [TestCase]
         public async Task Show_Size_And_Storage_Size_For_All_Collections()
         {

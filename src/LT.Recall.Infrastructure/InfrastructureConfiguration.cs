@@ -1,7 +1,9 @@
 ﻿namespace LT.Recall.Infrastructure
 {
-    public class InfrastructureConfiguration
+    public class InfrastructureConfiguration(bool xTest)
     {
-        public string StateFilePath { get; init; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recall-state.json");
+        public string StateFilePath { get; init; } = xTest
+            ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recall-state.json")
+            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RecallCli", "recall-state.json");
     }
 }

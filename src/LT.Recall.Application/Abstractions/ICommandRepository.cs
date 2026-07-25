@@ -5,6 +5,7 @@ namespace LT.Recall.Application.Abstractions
 {
     public interface ICommandRepository
     {
+        string Source { get; }
         Task BeginTransactionAsync();
 
         Task CommitTransactionAsync();

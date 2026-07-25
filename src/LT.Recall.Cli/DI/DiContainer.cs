@@ -15,10 +15,9 @@ namespace LT.Recall.Cli.DI
     internal class DiContainer : IDisposable
     {
         private IServiceScope _scope;
-        
-        public DiContainer()
+        public DiContainer(bool xTest)
         {
-            var services = BuildServiceCollection();
+            var services = BuildServiceCollection(xTest);
 #pragma warning disable IL3050
             _scope = services.BuildServiceProvider().CreateScope();
 #pragma warning restore IL3050
@@ -38,7 +37,7 @@ namespace LT.Recall.Cli.DI
         {
             _scope.Dispose();
         }
-        private IServiceCollection BuildServiceCollection()
+        private IServiceCollection BuildServiceCollection(bool xTest)
         {
             var services = new ServiceCollection();
 
@@ -63,7 +62,7 @@ namespace LT.Recall.Cli.DI
                 .AddTransient<Application.Features.Export.Handler>();
 
             services.AddSingleton<IRecallLogger>(new RecallLogger(LogLevel.Info));
-            services.AddSingleton<InfrastructureConfiguration>();
+            services.AddSingleton(new InfrastructureConfiguration(xTest));
 
             services.AddScoped<ICommandRepository, JsonFileSystemRepository>();
             services.AddScoped<IJsonSerializer, RecallJsonSerializer>();

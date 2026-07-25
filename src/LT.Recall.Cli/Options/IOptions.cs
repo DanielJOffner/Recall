@@ -1,4 +1,6 @@
-﻿namespace LT.Recall.Cli.Options
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace LT.Recall.Cli.Options
 {
     public interface IOptions
     {

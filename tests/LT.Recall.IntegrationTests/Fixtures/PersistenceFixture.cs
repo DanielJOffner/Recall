@@ -8,7 +8,7 @@ namespace LT.Recall.IntegrationTests.Fixtures
     [SetUpFixture]
     internal class PersistenceFixture
     {
-        private readonly ICommandRepository _commandRepository = new JsonFileSystemRepository( new RecallJsonSerializer(), new InfrastructureConfiguration());
+        private readonly ICommandRepository _commandRepository = new JsonFileSystemRepository( new RecallJsonSerializer(), new InfrastructureConfiguration(true));
 
         public ICommandRepository Repository => _commandRepository;
 

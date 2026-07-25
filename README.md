@@ -33,11 +33,13 @@ Install the example with `recall install linux`
 
 ## Backup/Restore
 
-All collections are stored in `recall-state.json` at the bin path location.
+All collections are stored in `RecalCli\recall-state.json` in the Local Application Data folder.
 ```
-C:\bin\recall.exe
-C:\bin\recall-state.json
-``` 
+Win
+C:\Users\USER_NAME\AppData\Local\RecallCli\recall-state.json
+Linux
+home/.local/share/RecallCli/recall-state.json
+```
 ## Todo
 - Add Linux support
 - Add MacOS support

@@ -24,6 +24,8 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
         private readonly IJsonSerializer _jsonSerializer;
         private readonly InfrastructureConfiguration _infrastructureConfiguration;
 
+        public string Source => GetStateFilePath();
+
         public JsonFileSystemRepository(IJsonSerializer jsonSerializer, InfrastructureConfiguration infrastructureConfiguration)
         {
             _jsonSerializer = jsonSerializer;
@@ -202,6 +204,11 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
             if (_filePath == null)
             {
                 _filePath = _infrastructureConfiguration.StateFilePath;
+            }
+
+            if (!Directory.Exists(Path.GetDirectoryName(_filePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_filePath)!);
             }
 
             if (!File.Exists(_filePath))

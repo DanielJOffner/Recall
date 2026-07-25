@@ -52,7 +52,7 @@ namespace LT.Recall.Cli
                 WaitToReadLine();
             }
 
-            var diContainer = new DiContainer();
+            var diContainer = new DiContainer(options.XTest);
 
             SetLogLevel(diContainer, options);
             var theme = ThemeStore.GetTheme();

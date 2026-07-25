@@ -28,12 +28,19 @@ namespace LT.Recall.Cli.Verbs
         private string GetMessage(Application.Features.Stats.Response response)
         {
             var sb = new StringBuilder();
+            FormatPersistence(response, sb);
+            sb.AppendLine();
             FormatTotals(response, sb);
             sb.AppendLine();
             FormatCollections(response, sb);
             sb.AppendLine();
             FormatTags(response, sb);
             return sb.ToString();
+        }
+
+        private void FormatPersistence(Application.Features.Stats.Response response, StringBuilder sb)
+        {
+            sb.AppendLine($"State File Source: {response.StateFileSource}");
         }
 
         private void FormatCollections(Application.Features.Stats.Response response, StringBuilder sb)
