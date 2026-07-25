@@ -166,16 +166,17 @@
     <value>List installers and collections.</value>
   </data>
   <data name="HelpText" xml:space="preserve">
-    <value>-v, --verbose	enable verbose output.
--h, --help	show help.
+    <value>-v, --verbose   enable verbose output.
+-h, --help      show help.
 
-save	Save a new command.
-search	Search commands.
-delete	Delete commands.
-import	Import commands.
-export	Export commands.
-stats	Storage statistics.
-install	Install collections.</value>
+save        Save a new command.
+search      Search commands.
+delete      Delete commands.
+import      Import commands.
+export      Export commands.
+stats       Storage statistics.
+install     Install collections.
+version     Show installed version.</value>
   </data>
   <data name="DeleteHelpText" xml:space="preserve">
     <value>-c, --collection    	storage collection.
@@ -214,5 +215,23 @@ usage:
   </data>
   <data name="StatsHelpText" xml:space="preserve">
     <value>show storage statistics.</value>
+  </data>
+  <data name="StateFileSource" xml:space="preserve">
+    <value>State File Source</value>
+  </data>
+  <data name="Collections" xml:space="preserve">
+    <value>Collections</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="TotalCommands" xml:space="preserve">
+    <value>Total Commands</value>
+  </data>
+  <data name="TotalSize" xml:space="preserve">
+    <value>Total Commands</value>
+  </data>
+  <data name="VersionHelpText" xml:space="preserve">
+    <value>Show installed version</value>
   </data>
 </root>

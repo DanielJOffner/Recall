@@ -25,7 +25,8 @@ namespace LT.Recall.Cli
             { "import", typeof(Import) },
             { "export", typeof(Export) },
             { "stats", typeof(Stats) },
-            { "install", typeof(Install) }
+            { "install", typeof(Install) },
+            { "version", typeof(Verbs.Version) }
         };
 
         public class Options : IOptions

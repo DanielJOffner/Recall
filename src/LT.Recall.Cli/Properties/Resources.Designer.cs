@@ -19,7 +19,7 @@ namespace LT.Recall.Cli.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -57,6 +57,15 @@ namespace LT.Recall.Cli.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collections.
+        /// </summary>
+        public static string Collections {
+            get {
+                return ResourceManager.GetString("Collections", resourceCulture);
             }
         }
         
@@ -158,16 +167,17 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -v, --verbose	enable verbose output.
-        ///-h, --help	show help.
+        ///   Looks up a localized string similar to -v, --verbose   enable verbose output.
+        ///-h, --help      show help.
         ///
-        ///save	Save a new command.
-        ///search	Search commands.
-        ///delete	Delete commands.
-        ///import	Import commands.
-        ///export	Export commands.
-        ///stats	Storage statistics.
-        ///install	Install collections..
+        ///save        Save a new command.
+        ///search      Search commands.
+        ///delete      Delete commands.
+        ///import      Import commands.
+        ///export      Export commands.
+        ///stats       Storage statistics.
+        ///install     Install collections.
+        ///version     Show installed version..
         /// </summary>
         public static string HelpText {
             get {
@@ -267,11 +277,47 @@ namespace LT.Recall.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to State File Source.
+        /// </summary>
+        public static string StateFileSource {
+            get {
+                return ResourceManager.GetString("StateFileSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to show storage statistics..
         /// </summary>
         public static string StatsHelpText {
             get {
                 return ResourceManager.GetString("StatsHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string Tags {
+            get {
+                return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Commands.
+        /// </summary>
+        public static string TotalCommands {
+            get {
+                return ResourceManager.GetString("TotalCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Commands.
+        /// </summary>
+        public static string TotalSize {
+            get {
+                return ResourceManager.GetString("TotalSize", resourceCulture);
             }
         }
         
@@ -290,6 +336,15 @@ namespace LT.Recall.Cli.Properties {
         public static string VerboseOptionHelpText {
             get {
                 return ResourceManager.GetString("VerboseOptionHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show installed version.
+        /// </summary>
+        public static string VersionHelpText {
+            get {
+                return ResourceManager.GetString("VersionHelpText", resourceCulture);
             }
         }
         

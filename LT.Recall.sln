@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.8.12021.73 stable
+VisualStudioVersion = 18.8.12021.73
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LT.Recall.Cli", "src\LT.Recall.Cli\LT.Recall.Cli.csproj", "{442C9BCF-B8A8-45A4-9211-60047E71F8A6}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "application", "application", "{69470FBF-A59C-43E9-90AD-F1CF7CA1A8CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentation", "{FFF7331E-FF9B-4D06-9BAE-0EBA25B44740}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installer", "installer", "{A0BC86DB-FC42-4B8D-A98C-C30342DAEB45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

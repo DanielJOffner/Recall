@@ -49,7 +49,8 @@ namespace LT.Recall.Cli.DI
                 .AddTransient<Verbs.Stats>()
                 .AddTransient<Verbs.Delete>()
                 .AddTransient<Verbs.Install>()
-                .AddTransient<Verbs.Export>();
+                .AddTransient<Verbs.Export>()
+                .AddTransient<Verbs.Version>();
 
             services
                 .AddTransient<Application.Features.Save.Handler>()

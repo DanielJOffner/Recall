@@ -10,17 +10,14 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<AssemblyName>recall</AssemblyName>
-		<PackageId>recall</PackageId>
-		<Title>Recall CLI</Title>
-		<Authors>Daniel Offner</Authors>
-		<Company>Daniel Offner</Company>
-		<Product>Recall CLI</Product>
-		<Description>Use cheat sheets at the command line</Description>
-		<Copyright>Copyright © Daniel Offner 2024</Copyright>
-		<AssemblyVersion>1.0.3.0</AssemblyVersion>
-		<FileVersion>1.0.3.0</FileVersion>
-		<Version>1.0.3.0</Version>
+	    <AssemblyName>recall</AssemblyName>
+	    <PackageId>recall</PackageId>
+	    <Title>Recall CLI</Title>
+	    <Authors>Daniel Offner</Authors>
+	    <Company>Daniel Offner</Company>
+	    <Product>Recall CLI</Product>
+	    <Description>Use cheat sheets at the command line</Description>
+	    <Copyright>Copyright © Daniel Offner 2026</Copyright>
 	</PropertyGroup>
 
   <ItemGroup>
