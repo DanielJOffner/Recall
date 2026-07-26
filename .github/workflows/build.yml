@@ -8,8 +8,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      VERSION: ${{ github.ref_name }}
 
     permissions:
       contents: read
@@ -69,7 +67,7 @@ jobs:
             -p:InformationVersion="${VERSION}" \
             -p:IncludeSourceRevisionInInformationalVersion=false
 
-      - name: Upload recall.exe
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: recall-win-x64
