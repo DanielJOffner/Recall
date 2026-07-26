@@ -33,22 +33,6 @@ jobs:
       
       - name: Run Tests
         run: dotnet test --no-restore --logger trx --results-directory "${{ github.workspace }}/TestResults"
-      
-      - name: Upload dotnet test results
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
-        with:
-          name: test-results
-          path: "${{ github.workspace }}/TestResults"
-        # Use always() to always run this step to publish test results when there are test failures
-        if: ${{ always() }}
-      
-      - name: Test Report
-        uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: Test Report            # Name of the check run which will be created
-          path: "${{ github.workspace }}/TestResults/*.trx"    # Path to test results
-          reporter: dotnet-trx        # Format of test results
 
       - name: Publish
         run: |
@@ -66,7 +50,7 @@ jobs:
             -p:IncludeSourceRevisionInInformationalVersion=false
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: recall-win-x64
           path: src/LT.Recall.Cli/bin/Release/net10.0/win-x64/publish/recall.exe
