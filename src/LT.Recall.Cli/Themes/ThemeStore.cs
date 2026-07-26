@@ -16,13 +16,19 @@
                 return new DefaultTheme();
             }
 
-            var themeType = Type.GetType($"{typeof(DefaultTheme).Namespace}.{themeName}");
-            if (themeType == null)
+            // Todo - add some more themes
+            if(Enum.TryParse(themeName, out Theme theme))
             {
-                return new DefaultTheme();
+                switch (theme)
+                {
+                    case Theme.Default:
+                        return new DefaultTheme();
+                    default:
+                        return new DefaultTheme();
+                }   
             }
 
-            return (ITheme)Activator.CreateInstance(themeType)!;
+           return new DefaultTheme();
         }
     }
 }

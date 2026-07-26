@@ -2,32 +2,29 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	<PublishAot>true</PublishAot>
     <StripSymbols>true</StripSymbols>
+	<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
 	<PropertyGroup>
-		<AssemblyName>recall</AssemblyName>
-		<PackageId>recall</PackageId>
-		<Title>Recall CLI</Title>
-		<Authors>Daniel Offner</Authors>
-		<Company>Daniel Offner</Company>
-		<Product>Recall CLI</Product>
-		<Description>Use cheat sheets at the command line</Description>
-		<Copyright>Copyright © Daniel Offner 2024</Copyright>
-		<AssemblyVersion>1.0.3.0</AssemblyVersion>
-		<FileVersion>1.0.3.0</FileVersion>
-		<Version>1.0.3.0</Version>
+	    <AssemblyName>recall</AssemblyName>
+	    <PackageId>recall</PackageId>
+	    <Title>Recall CLI</Title>
+	    <Authors>Daniel Offner</Authors>
+	    <Company>Daniel Offner</Company>
+	    <Product>Recall CLI</Product>
+	    <Description>Use cheat sheets at the command line</Description>
+	    <Copyright>Copyright © Daniel Offner 2026</Copyright>
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="TextCopy" Version="6.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="TextCopy" />
   </ItemGroup>
 
   <ItemGroup>

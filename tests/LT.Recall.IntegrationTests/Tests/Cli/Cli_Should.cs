@@ -17,8 +17,8 @@ namespace LT.Recall.IntegrationTests.Tests.Cli
 
             // assert
             lowerCaseOutput.Should().BeEquivalentTo(upperCaseOutput);
-            lowerCaseOutput.Message.Should().Contain("-h, --help\tshow help."); 
-            upperCaseOutput.Message.Should().Contain("-h, --help\tshow help.");
+            lowerCaseOutput.Message.Should().Contain("-h, --help      show help.");
+            upperCaseOutput.Message.Should().Contain("-h, --help      show help.");
         }
 
 
@@ -38,6 +38,17 @@ namespace LT.Recall.IntegrationTests.Tests.Cli
             File.Exists(stateFileName).Should().BeTrue();
         }
 
+        [TestCase]
+        public void Print_Version()
+        {          
+            // arrange
+
+            // act
+            var output = ExecuteCommand<object>("version");
+
+            // assert
+            output.Message.Should().Be("1.0.0.0");
+        }
 
         [TestCaseSource(nameof(HelpTestCases))]
         public void Show_Localized_Help_Text(string command, string expectedResponse)
@@ -56,16 +67,17 @@ namespace LT.Recall.IntegrationTests.Tests.Cli
             new object[]
             {
                 "help",
-                @"-v, --verbose	enable verbose output.
--h, --help	show help.
+                @"-v, --verbose   enable verbose output.
+-h, --help      show help.
 
-save	Save a new command.
-search	Search commands.
-delete	Delete commands.
-import	Import commands.
-export	Export commands.
-stats	Storage statistics.
-install	Install collections."
+save        Save a new command.
+search      Search commands.
+delete      Delete commands.
+import      Import commands.
+export      Export commands.
+stats       Storage statistics.
+install     Install collections.
+version     Show installed version."
             },
             new object[]
             {

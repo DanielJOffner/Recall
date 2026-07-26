@@ -24,6 +24,8 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
         private readonly IJsonSerializer _jsonSerializer;
         private readonly InfrastructureConfiguration _infrastructureConfiguration;
 
+        public string Source => GetStateFilePath();
+
         public JsonFileSystemRepository(IJsonSerializer jsonSerializer, InfrastructureConfiguration infrastructureConfiguration)
         {
             _jsonSerializer = jsonSerializer;
@@ -131,10 +133,9 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
         public Task<(List<Command>? commands, int totalResults)> SearchAsync(string searchString, int page, int pageSize)
         {
             var searchModel = SearchStringParser.Parse(searchString);
-            var query = GetState().Commands.AsQueryable();
-
-            query = query.Where(x => searchModel.Terms.Any(term => x.SearchableText.Contains(term, StringComparison.InvariantCultureIgnoreCase)));
-            query = query.OrderByDescending(x => SearchRank(x, searchModel));
+            var query = GetState().Commands
+                .Where(x => searchModel.Terms.Any(term => x.SearchableText.Contains(term, StringComparison.InvariantCultureIgnoreCase)))
+                .OrderByDescending(x => SearchRank(x, searchModel));
 
             return Page(page, pageSize, query.ToList());
         }
@@ -202,6 +203,11 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
             if (_filePath == null)
             {
                 _filePath = _infrastructureConfiguration.StateFilePath;
+            }
+
+            if (!Directory.Exists(Path.GetDirectoryName(_filePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(_filePath)!);
             }
 
             if (!File.Exists(_filePath))

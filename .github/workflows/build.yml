@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    permissions:
+      contents: read
+      checks: write
+
+    env:
+      BUILD_VERSION: ${{ github.ref_name }}
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Install dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --no-restore
+      
+      - name: Run Tests
+        run: dotnet test --no-restore --logger trx --results-directory "${{ github.workspace }}/TestResults"
+
+      - name: Publish
+        shell: pwsh
+        run: |
+          $BUILD_VERSION = $env:BUILD_VERSION -replace '^v', ''
+
+          echo "Building version: $BUILD_VERSION"
+
+          dotnet publish "./src/LT.Recall.Cli/LT.Recall.Cli.csproj" `
+            --configuration Release `
+            --runtime win-x64 `
+            -p:PublishSingleFile=true `
+            -p:PublishReadyToRun=true `
+            -p:Version="$BUILD_VERSION" `
+            -p:InformationVersion="$BUILD_VERSION" `
+            -p:IncludeSourceRevisionInInformationalVersion=false
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: recall-win-x64
+          path: src/LT.Recall.Cli/bin/Release/net10.0/win-x64/publish/recall.exe

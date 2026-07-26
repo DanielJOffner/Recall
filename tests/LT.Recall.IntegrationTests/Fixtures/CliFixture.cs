@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace LT.Recall.IntegrationTests.Fixtures
 {
     [SetUpFixture]
-    internal class CliFixture
+    internal abstract class CliFixture
     {
         private readonly int _processTimeout = 2000;
         private readonly string _fileName = Environment.OSVersion.Platform == PlatformID.Unix ? "recall" : "recall.exe";

@@ -1,6 +1,7 @@
 ﻿using LT.Recall.Application.Abstractions;
 using LT.Recall.Application.Extensions;
 using LT.Recall.Domain.Entities;
+using System.Runtime.CompilerServices;
 
 namespace LT.Recall.Application.Features
 {
@@ -33,6 +34,7 @@ namespace LT.Recall.Application.Features
                 public string Size { get; set; } = string.Empty;
             }
 
+            public string StateFileSource { get; set; } = string.Empty;
             public TotalsResponse Totals { get; set; } = new();
             public List<TagsResponse> Tags { get; set; } = new();
             public List<CollectionResponse> Collections { get; set; } = new();
@@ -41,7 +43,6 @@ namespace LT.Recall.Application.Features
         public class Handler
         {
             private readonly ICommandRepository _commandRepository;
-
             public Handler(ICommandRepository commandRepository)
             {
                 _commandRepository = commandRepository;
@@ -56,8 +57,14 @@ namespace LT.Recall.Application.Features
                 GetTagSize(allCommands, response);
                 GetTotalSize(response, allCommands);
                 GetCollectionSize(allCommands, response);
+                GetStateFileSource(response);
 
                 return response;
+            }
+
+            private void GetStateFileSource(Response response)
+            {
+                response.StateFileSource = _commandRepository.Source;
             }
 
             private static void GetTotalSize(Response response, List<Command> allCommands)

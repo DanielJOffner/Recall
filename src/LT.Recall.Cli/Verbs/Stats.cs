@@ -28,6 +28,8 @@ namespace LT.Recall.Cli.Verbs
         private string GetMessage(Application.Features.Stats.Response response)
         {
             var sb = new StringBuilder();
+            FormatPersistence(response, sb);
+            sb.AppendLine();
             FormatTotals(response, sb);
             sb.AppendLine();
             FormatCollections(response, sb);
@@ -36,11 +38,16 @@ namespace LT.Recall.Cli.Verbs
             return sb.ToString();
         }
 
+        private void FormatPersistence(Application.Features.Stats.Response response, StringBuilder sb)
+        {
+            sb.AppendLine($"{Resources.StateFileSource}: {response.StateFileSource}");
+        }
+
         private void FormatCollections(Application.Features.Stats.Response response, StringBuilder sb)
         {
             if (response.Collections.Any())
             {
-                sb.AppendLine("Collections:");
+                sb.AppendLine($"{Resources.Collections}:");
                 foreach (var collection in response.Collections)
                 {
                     sb.AppendLine($"{collection.Collection}|{collection.Count}|{collection.Size}");
@@ -52,7 +59,7 @@ namespace LT.Recall.Cli.Verbs
         {
             if (response.Tags.Any())
             {
-                sb.AppendLine("Tags:");
+                sb.AppendLine($"{Resources.Tags}:");
                 foreach (var tag in response.Tags)
                 {
                     sb.AppendLine($"{tag.Tag}|{tag.Count}|{tag.Size}");
@@ -63,8 +70,8 @@ namespace LT.Recall.Cli.Verbs
 
         private void FormatTotals(Application.Features.Stats.Response response, StringBuilder sb)
         {
-            sb.AppendLine($"Total Commands: {response.Totals.TotalCommands}");
-            sb.AppendLine($"Total Size: {response.Totals.TotalSize}");
+            sb.AppendLine($"{Resources.TotalCommands}: {response.Totals.TotalCommands}");
+            sb.AppendLine($"{Resources.TotalSize}: {response.Totals.TotalSize}");
         }
     }
 }
