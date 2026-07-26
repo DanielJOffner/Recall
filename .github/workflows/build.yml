@@ -35,18 +35,19 @@ jobs:
         run: dotnet test --no-restore --logger trx --results-directory "${{ github.workspace }}/TestResults"
 
       - name: Publish
+        shell: pwsh
         run: |
-          BUILD_VERSION="${BUILD_VERSION#v}"
+          $BUILD_VERSION = $env:BUILD_VERSION -replace '^v', ''
 
-          echo "Building version: ${BUILD_VERSION}"
+          echo "Building version: $BUILD_VERSION"
 
-          dotnet publish "./src/LT.Recall.Cli/LT.Recall.Cli.csproj" \
-            --configuration Release \
-            --runtime win-x64 \
-            -p:PublishSingleFile=true \
-            -p:PublishReadyToRun=true \
-            -p:Version="${BUILD_VERSION}" \
-            -p:InformationVersion="${BUILD_VERSION}" \
+          dotnet publish "./src/LT.Recall.Cli/LT.Recall.Cli.csproj" `
+            --configuration Release `
+            --runtime win-x64 `
+            -p:PublishSingleFile=true `
+            -p:PublishReadyToRun=true `
+            -p:Version="$BUILD_VERSION" `
+            -p:InformationVersion="$BUILD_VERSION" `
             -p:IncludeSourceRevisionInInformationalVersion=false
 
       - name: Upload Build Artifact
