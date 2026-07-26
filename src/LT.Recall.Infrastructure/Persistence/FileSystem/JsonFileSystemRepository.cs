@@ -133,10 +133,9 @@ namespace LT.Recall.Infrastructure.Persistence.FileSystem
         public Task<(List<Command>? commands, int totalResults)> SearchAsync(string searchString, int page, int pageSize)
         {
             var searchModel = SearchStringParser.Parse(searchString);
-            var query = GetState().Commands.AsQueryable();
-
-            query = query.Where(x => searchModel.Terms.Any(term => x.SearchableText.Contains(term, StringComparison.InvariantCultureIgnoreCase)));
-            query = query.OrderByDescending(x => SearchRank(x, searchModel));
+            var query = GetState().Commands
+                .Where(x => searchModel.Terms.Any(term => x.SearchableText.Contains(term, StringComparison.InvariantCultureIgnoreCase)))
+                .OrderByDescending(x => SearchRank(x, searchModel));
 
             return Page(page, pageSize, query.ToList());
         }
