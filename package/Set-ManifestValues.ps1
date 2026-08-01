@@ -12,7 +12,7 @@
 
 .PARAMETER PublisherId
     The Publisher value from Partner Center > Product identity, e.g.
-    "CN=A1B2C3D4-1234-5678-9ABC-DEF012345678".
+    "CN=random-partner-center-id-guid".
 
 .PARAMETER TemplatePath
     Path to the manifest template. Defaults to .\package\AppxManifest.xml.template
@@ -21,7 +21,7 @@
     Path to write the resolved manifest. Defaults to .\package\AppxManifest.xml
 
 .EXAMPLE
-    .\Set-ManifestValues.ps1 -Version "1.4.22" -PublisherId "CN=A1B2C3D4-1234-5678-9ABC-DEF012345678"
+    .\Set-ManifestValues.ps1 -Version "1.4.22" -PublisherId "CN=random-partner-center-id-guid"
 
 .EXAMPLE
     # Typical CI usage, pulling from pipeline variables/secrets
