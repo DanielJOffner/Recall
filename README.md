@@ -1,4 +1,4 @@
-Use cheat sheets at the command line. 
+Save, search and copy commands, directly from the terminal.
 
 ![gif](https://github.com/DanielJOffner/Recall/blob/main/assets/preview.gif)
 
